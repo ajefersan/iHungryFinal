@@ -75,8 +75,9 @@ public class ProdutoDAO extends ConnectionFactory{
         return lista;
     }
     
-    public void atualizar(Produto item) throws SQLException 
+    public boolean atualizar(Produto item) throws SQLException 
     {   
+        boolean resposta = true;
         String qr = "UPDATE produto SET codigo=?, nome=?, preco=? , quantidade=? , status=? , tipo=?, observacao WHERE idProduto=?";
         try(PreparedStatement stmt = this.query(qr)) 
         {
@@ -90,7 +91,11 @@ public class ProdutoDAO extends ConnectionFactory{
                         
             stmt.execute();
             stmt.close();
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            resposta = false;
         }
+        return resposta;
     }
 
     public void deletar(Produto item) throws SQLException 

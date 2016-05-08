@@ -88,6 +88,25 @@ public class Produto {
         return resposta;
     }
     
+    public boolean bloquarProduto(Produto produto){
+        
+        
+          boolean resposta = true;
+         try {
+              ProdutoDAO prod = new ProdutoDAO();
+              this.status = 0;
+              resposta = prod.atualizar(produto);
+              
+            
+         } catch (Exception e) {
+             System.out.println(e.getMessage());
+         }
+       
+        return resposta;
+    
+    
+    }
+    
 
 
    
