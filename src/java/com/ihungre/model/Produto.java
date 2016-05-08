@@ -88,13 +88,17 @@ public class Produto {
         return resposta;
     }
     
-    public boolean bloquearProduto(Produto produto){
-        
+    public boolean bloquearOuAtt(Produto produto,int operacao){
+        /* Operacao 1 = atualizar
+           Operacao 2 = bloquear
+        */
         
           boolean resposta = true;
+          if(operacao == 1)
+                 this.status = 0;
          try {
               ProdutoDAO prod = new ProdutoDAO();
-              this.status = 0;
+              
               resposta = prod.atualizar(produto);
               
             
@@ -125,6 +129,8 @@ public class Produto {
     
     
     }
+     
+     
     
 
 
