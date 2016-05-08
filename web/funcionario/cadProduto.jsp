@@ -16,11 +16,12 @@
     <body>
       <div class="container row">
         
-        <div class="col s12">
-            <form name="form" onsubmit="return validar();" class="col s8 offset-s2">
+       
+        <form name="form"action="http://localhost:8083/iHungry/servletProdutoAdd" method="post" onsubmit="return validar();" class="col s8 offset-s2" >
                 <div class="row">
+                <fieldset>
 
-                    <fieldset>
+                    
 
                         <div class="input-field col s12">
                             <h4>Cadastro de Produtos</h4>   
@@ -48,11 +49,6 @@
                                 
                             </div>  
 
-                            <div class="col s4">
-                                <button class="btn red darken1" type="submit" name="action">Buscar
-                               <i class="material-icons right"></i>
-                            </button>
-                            </div>
                         </div>   
                     
                         <div class="input-field col s12">
@@ -81,12 +77,12 @@
                         <button class="btn red darken1" type="submit" name="action">Cadastrar
                           
                         </button>
-                    </fildset>  
 
-                </div>  
+               
             </form>
+            </fieldset>
         </div>  
-    </div>
+    
      <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
       <script type="text/javascript" src="../assets/js/materialize.min.js"></script>
     </body>

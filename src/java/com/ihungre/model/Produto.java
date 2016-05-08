@@ -1,5 +1,7 @@
 package com.ihungre.model;
 
+import com.ihungry.model.dao.ProdutoDAO;
+
 public class Produto {
     
     private int idProduto;
@@ -69,6 +71,21 @@ public class Produto {
 
     public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
+    }
+    
+    public boolean cadastrar (Produto produto) throws Exception {
+
+          boolean resposta = true;
+         try {
+              ProdutoDAO prod = new ProdutoDAO();
+              resposta = prod.cadastrar(produto);
+              
+            
+         } catch (Exception e) {
+             System.out.println(e.getMessage());
+         }
+       
+        return resposta;
     }
     
 

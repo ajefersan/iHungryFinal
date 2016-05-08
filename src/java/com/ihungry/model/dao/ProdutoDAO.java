@@ -11,11 +11,11 @@ import java.util.ArrayList;
 
 public class ProdutoDAO extends ConnectionFactory{
     
-     public void cadastrar(Produto prod) throws SQLException
+     public boolean cadastrar(Produto prod) throws SQLException
     {   
-        String qr = "INSERT INTO produto (codigo,nome,preco,quantidade,status,tipo,observacao) VALUES (?,?,?,?)";
+        String qr = "INSERT INTO produto (codigo,nome,preco,quantidade,status,tipo,observacao) VALUES (?,?,?,?,?,?,?)";
        
-        
+        boolean resposta = true;
         try(PreparedStatement stmt = this.query(qr))
             
         {
@@ -32,9 +32,10 @@ public class ProdutoDAO extends ConnectionFactory{
             stmt.close(); 
             System.out.println("Cad 2 ok!");
         } catch (SQLException e){
-            e.printStackTrace();
+            System.out.println(e.getMessage());
+            resposta = false;
         }
-    
+    return resposta;
     }
     private ArrayList<Produto> listar(ResultSet resultset) throws SQLException
     {
