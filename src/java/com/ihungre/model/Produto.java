@@ -88,7 +88,7 @@ public class Produto {
         return resposta;
     }
     
-    public boolean bloquarProduto(Produto produto){
+    public boolean bloquearProduto(Produto produto){
         
         
           boolean resposta = true;
@@ -96,6 +96,25 @@ public class Produto {
               ProdutoDAO prod = new ProdutoDAO();
               this.status = 0;
               resposta = prod.atualizar(produto);
+              
+            
+         } catch (Exception e) {
+             System.out.println(e.getMessage());
+         }
+       
+        return resposta;
+    
+    
+    }
+    
+     public boolean deletarProduto(Produto produto){
+        
+        
+          boolean resposta = true;
+         try {
+              ProdutoDAO prod = new ProdutoDAO();
+              this.status = 0;
+              resposta = prod.deletar(produto);
               
             
          } catch (Exception e) {
