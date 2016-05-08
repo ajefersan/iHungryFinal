@@ -25,7 +25,7 @@ public class ProdutoDAO extends ConnectionFactory{
             stmt.setDouble(3,prod.getPreco());
             stmt.setInt(4, prod.getQuantidade());
             stmt.setInt(5, prod.getStatus());
-            stmt.setDouble(6,prod.getTipo());
+            stmt.setString(6,prod.getTipo());
             stmt.setString(7, prod.getObservacao());
            
             stmt.execute();
@@ -84,7 +84,7 @@ public class ProdutoDAO extends ConnectionFactory{
             stmt.setDouble(3, item.getPreco());
             stmt.setInt(4, item.getQuantidade());
             stmt.setDouble(5, item.getStatus());
-            stmt.setInt(6, item.getTipo());
+            stmt.setString(6, item.getTipo());
             stmt.setString(7, item.getObservacao());
                         
             stmt.execute();

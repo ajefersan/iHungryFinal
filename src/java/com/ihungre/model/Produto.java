@@ -6,16 +6,16 @@ public class Produto {
     private String codigo;
     private String nome;
     private Double preco;
-    private int tipo;
+    private String tipo;
     private String observacao;
     private int quantidade;
     private int status;
 
-    public int getTipo() {
+    public String getTipo() {
         return tipo;
     }
 
-    public void setTipo(int tipo) {
+    public void setTipo(String tipo) {
         this.tipo = tipo;
     }
 
