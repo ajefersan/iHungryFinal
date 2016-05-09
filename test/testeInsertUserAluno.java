@@ -50,7 +50,7 @@ public class testeInsertUserAluno {
         alunoDAO.cadastrar(aluno,"cpf3"); 
      Responsavel res = new Responsavel();
         res.depositarCredito(aluno, 500,"cpf3");
-        System.out.println(aluno.consultarSaldo());
+        System.out.println(aluno.consultarSaldo(aluno.getMatricula()));
     
     } 
      

@@ -127,11 +127,11 @@ public class Aluno extends Usuario{
         return resposta;
     }
     
-     public float consultarSaldo(){
+     public float consultarSaldo(String matricula){
          float saldo = 0;
           try {
               AlunoDAO a = new AlunoDAO();
-              saldo = a.consultarSaldo(this); 
+              saldo = a.consultarSaldo( matricula); 
             
          } catch (Exception e) {
              System.out.println(e.getMessage());

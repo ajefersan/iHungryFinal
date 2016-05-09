@@ -162,9 +162,9 @@ public class AlunoDAO extends UsuarioDAO{
      
      }
       
-    public float consultarSaldo(Aluno aluno){
+    public float consultarSaldo(String matricula){
         float saldo = 0;
-        String qr = "SELECT saldo FROM aluno WHERE matricula = '" + aluno.getMatricula() + " '" ;
+        String qr = "SELECT saldo FROM aluno WHERE matricula = '" + matricula + " '" ;
           try (PreparedStatement stmt = this.query(qr)) 
         {
            // stmt.setInt(1,id);
