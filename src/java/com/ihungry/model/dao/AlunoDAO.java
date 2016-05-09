@@ -130,7 +130,30 @@ public class AlunoDAO extends UsuarioDAO{
              System.out.println(id + "imprimi isso");
            
         }catch(Exception e ){
-            System.out.println(e.getMessage());
+            System.out.println(e.getMessage() + "Entrei nesse");
+        }
+          
+          return id;
+         
+     
+     
+     }
+      
+       public int pegarIdUsuario(String matricula )throws SQLException {
+         int id = 0;
+         String qr = "SELECT idUsuario_FK from aluno where matricula = '"+matricula+"'";
+         
+          try (PreparedStatement stmt = this.query(qr)) 
+        {
+           // stmt.setInt(1,id);
+           
+            ResultSet rs = stmt.executeQuery();
+            rs.next();
+             id = rs.getInt("idUsuario_FK");
+             System.out.println(id + "imprimi id usuario");
+           
+        }catch(Exception e ){
+            System.out.println(e.getMessage() + "Entrei idFK nesse");
         }
           
           return id;
@@ -158,23 +181,26 @@ public class AlunoDAO extends UsuarioDAO{
         return saldo;
     }
     
-    public void atualizar(Aluno item) throws SQLException 
-    {   
-        String qr = "UPDATE aluno SET nome=?, matricula=?, turma=? , turno=? , saldo=? , idUsuario_FK=?, idResponsavel_FK , idEscola_FK=? WHERE id=?";
+    public void atualizar(Aluno item,String cpf) throws SQLException 
+    {   //adicionar idEscola_Fk qdo criar a tabela
+        String qr = "UPDATE aluno SET matricula=?, turma=? , turno=? , saldo=? , idUsuario_FK=?, idResponsavel_FK = ?  WHERE matricula = '" + item.getMatricula()+"'";
         try(PreparedStatement stmt = this.query(qr)) 
         {
-            stmt.setString(1, item.getNome());
-            stmt.setString(2, item.getMatricula());
-            stmt.setString(3, item.getTurma());
-            stmt.setString(4, item.getTurno());
-            stmt.setDouble(5, item.getSaldo());
-            stmt.setInt(6, item.getIdUsuario());
-            stmt.setInt(7, item.getIdResponsavel());
-            stmt.setInt(8, item.getIdEscola());
-            stmt.setInt(9, item.getIdUsuario());
+            //aluno nao tem nome
+            stmt.setString(1, item.getMatricula());
+            stmt.setString(2, item.getTurma());
+            stmt.setString(3, item.getTurno());
+            stmt.setDouble(4, item.getSaldo());
+            stmt.setInt(5, this.pegarIdUsuario(item.getMatricula()));
+            stmt.setInt(6, this.pegarIdResponsavel(cpf));
+           // stmt.setInt(8, item.getIdEscola());
+           
             
             stmt.execute();
             stmt.close();
+        }catch(Exception e){
+        
+            System.out.println(e.getMessage()+ " ALUNO DAO");
         }
     }
 

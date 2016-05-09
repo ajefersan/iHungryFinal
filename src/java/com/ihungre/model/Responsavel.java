@@ -86,7 +86,7 @@ public class Responsavel extends Usuario {
         return resposta;
     }
      
-    public void depositarCredito(Aluno aluno, float saldo){
+    public void depositarCredito(Aluno aluno, float saldo,String cpf){
         Double novoSaldo;
         
         
@@ -94,10 +94,10 @@ public class Responsavel extends Usuario {
         aluno.setSaldo(novoSaldo);
         try{
             AlunoDAO a = new AlunoDAO();
-            a.atualizar(aluno);
+            a.atualizar(aluno,cpf);
         }catch(Exception e){
         
-            System.out.println(e.getMessage());
+            System.out.println(e.getMessage() + "entrei aqui");
         }
         
         

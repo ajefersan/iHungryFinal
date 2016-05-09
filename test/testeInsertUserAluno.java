@@ -36,7 +36,7 @@ public class testeInsertUserAluno {
        
       //matricula,turma,turno,saldo,idUsuario_FK,idResponsavel_FK,idEscola_FK
       Aluno aluno = new Aluno();
-      aluno.setMatricula("31");
+      aluno.setMatricula("3aa3ssddssjjddjkkccmsssrlw31");
       aluno.setTurma("B");
       aluno.setTurno("VES");
       aluno.setSaldo(120.3);
@@ -48,6 +48,8 @@ public class testeInsertUserAluno {
       
       AlunoDAO alunoDAO = new AlunoDAO();
         alunoDAO.cadastrar(aluno,"cpf3"); 
+     Responsavel res = new Responsavel();
+        res.depositarCredito(aluno, 500,"cpf3");
         System.out.println(aluno.consultarSaldo());
     
     } 
