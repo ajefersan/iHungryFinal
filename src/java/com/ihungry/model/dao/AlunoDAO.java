@@ -138,6 +138,25 @@ public class AlunoDAO extends UsuarioDAO{
      
      
      }
+      
+    public float consultarSaldo(Aluno aluno){
+        float saldo = 0;
+        String qr = "SELECT saldo FROM aluno WHERE matricula = '" + aluno.getMatricula() + " '" ;
+          try (PreparedStatement stmt = this.query(qr)) 
+        {
+           // stmt.setInt(1,id);
+           
+            ResultSet rs = stmt.executeQuery();
+            rs.next();
+             saldo = rs.getFloat("saldo");
+            
+           
+        }catch(Exception e ){
+            System.out.println(e.getMessage());
+        }
+    
+        return saldo;
+    }
     
     public void atualizar(Aluno item) throws SQLException 
     {   

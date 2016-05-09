@@ -14,7 +14,7 @@ public class testeInsertUserAluno {
     */
     
       
-   Usuario userP = new Usuario();
+  /* Usuario userP = new Usuario();
       userP.setLogin("AAA223");
       userP.setSenha("admn");
       userP.setNome("Ed");
@@ -32,19 +32,23 @@ public class testeInsertUserAluno {
       Usuario user = new Usuario();
       user.setLogin("carinha");
       user.setSenha("123");
-      user.setNome("coroa");
+      user.setNome("coroa");*/
        
       //matricula,turma,turno,saldo,idUsuario_FK,idResponsavel_FK,idEscola_FK
       Aluno aluno = new Aluno();
-      aluno.setMatricula("301");
+      aluno.setMatricula("31");
       aluno.setTurma("B");
       aluno.setTurno("VES");
       aluno.setSaldo(120.3);
-      aluno.setResponsavel(idReturnP);
+      aluno.setLogin("login");
+      aluno.setSenha("senha");
+      aluno.setTipoUsuario("ALUNO");
+      aluno.setNome("jeferson");
       
       
       AlunoDAO alunoDAO = new AlunoDAO();
-//    alunoDAO.cadastrar(user, aluno,"cpf3"); 
+        alunoDAO.cadastrar(aluno,"cpf3"); 
+        System.out.println(aluno.consultarSaldo());
     
     } 
      

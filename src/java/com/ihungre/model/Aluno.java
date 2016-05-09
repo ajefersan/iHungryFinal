@@ -127,6 +127,19 @@ public class Aluno extends Usuario{
         return resposta;
     }
     
+     public float consultarSaldo(){
+         float saldo = 0;
+          try {
+              AlunoDAO a = new AlunoDAO();
+              saldo = a.consultarSaldo(this); 
+            
+         } catch (Exception e) {
+             System.out.println(e.getMessage());
+         }
+         return saldo;
+     
+     
+     }
     
 
   
