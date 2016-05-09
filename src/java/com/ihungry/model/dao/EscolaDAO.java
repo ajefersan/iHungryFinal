@@ -12,23 +12,28 @@ import java.util.ArrayList;
 
 public class EscolaDAO extends ConnectionFactory {
     
-    public void cadastrar(Escola item) throws SQLException
+    public boolean cadastrar(Escola item) throws SQLException
     {   
-        String qr = "INSERT INTO escola (nome,telefone,email) VALUES (?,?,?)";
+        String qr = "INSERT INTO escola (nome,endereco,telefone,email) VALUES (?,?,?,?)";
+        boolean resposta = true;
        
         
         try(PreparedStatement stmt = this.query(qr))
         {
             
             stmt.setString(1, item.getNome());
-            stmt.setString(2, item.getTelefone());
-            stmt.setString(3, item.getEmail());
+            stmt.setString(2, item.getEndereço());   
+            stmt.setString(3, item.getTelefone());
+            stmt.setString(4, item.getEmail());
            
             stmt.execute();
             stmt.close(); 
-            System.out.println("Cad ok!");
+         
         } catch (SQLException e){
+            System.out.println(e.getMessage());
+            resposta = false;
         }
+        return resposta;
     }
     
     private ArrayList<Escola> listar(ResultSet resultset) throws SQLException

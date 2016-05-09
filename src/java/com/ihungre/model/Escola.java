@@ -1,5 +1,7 @@
 package com.ihungre.model;
 
+import com.ihungry.model.dao.EscolaDAO;
+
 public class Escola {
     
     private int idEscola;
@@ -7,6 +9,14 @@ public class Escola {
     private String telefone;
     private String email;
 
+    public String getEndereço() {
+        return endereço;
+    }
+
+    public void setEndereço(String endereço) {
+        this.endereço = endereço;
+    }
+    private String endereço;
     public int getIdEscola() {
         return idEscola;
     }
@@ -37,6 +47,21 @@ public class Escola {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+    
+    public boolean cadastrar (Escola esc) throws Exception {
+
+          boolean resposta = true;
+         try {
+             EscolaDAO escola = new EscolaDAO();
+              resposta = escola.cadastrar(esc);
+              
+            
+         } catch (Exception e) {
+             System.out.println(e.getMessage());
+         }
+       
+        return resposta;
     }
     
     

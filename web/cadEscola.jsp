@@ -25,23 +25,23 @@
 						</div>
 
 						<div class="input-field col s12">
-							<input class="validate" type="text" placeholder="Nome da Escola" name="escola"></input>
+							<input class="validate" type="text" placeholder="Nome da Escola" name="nome"></input>
 							<label for="nome">Nome da Escola</label>
 						</div>
 												
 						
 						<div class="input-field col s12">
-							<input class="validate" type="text" name="endereco" placeholder="Endereço"></input>
+							<input class="validate" type="text" name="endereco" placeholder="endereço"></input>
 							<label for="end">Endereco</label>
 						</div>	
 
 						<div class="input-field col s12">					
-							<input class="validate" type="text" name="telefone" placeholder="Telefone"></input>	<label for="tel">Telefone</label>	
+							<input class="validate" type="text" name="telefone" placeholder="telefone"></input>	<label for="tel">Telefone</label>	
 
 						</div>
 
 						<div class="input-field col s12">
-							<input class="validate" type="email" name="email" placeholder="Email"></input>
+							<input class="validate" type="email" name="email" placeholder="email"></input>
 							<label for="email">Email</label>
 						</div>
 
