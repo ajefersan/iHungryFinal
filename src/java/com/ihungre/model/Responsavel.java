@@ -1,6 +1,8 @@
 package com.ihungre.model;
 
+import com.ihungry.model.dao.AlunoDAO;
 import com.ihungry.model.dao.ResponsavelDAO;
+import java.sql.SQLException;
 
 public class Responsavel extends Usuario {
     
@@ -82,6 +84,25 @@ public class Responsavel extends Usuario {
          }
        
         return resposta;
+    }
+     
+    public void depositarCredito(Aluno aluno, float saldo){
+        Double novoSaldo;
+        
+        
+        novoSaldo = aluno.getSaldo() + saldo;
+        aluno.setSaldo(novoSaldo);
+        try{
+            AlunoDAO a = new AlunoDAO();
+            a.atualizar(aluno);
+        }catch(Exception e){
+        
+            System.out.println(e.getMessage());
+        }
+        
+        
+    
+    
     }
     
     
