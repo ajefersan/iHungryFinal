@@ -131,13 +131,12 @@ public class ResponsavelDAO extends UsuarioDAO{
         resultset.close();
         return lista;
     }
-    public Usuario consultaPorLoginSenha(String usuario,String senha) throws SQLException{
+    public Usuario login(String usuario,String senha) throws SQLException{
         
-       String sql = "SELECT login,senha,nome FROM  usuario \n" +
-                    "INNER JOIN aluno \n" +
-                    "ON usuario.idUsuario = aluno.idUsuario_FK \n" +
-                    "WHERE login = '"+ usuario +"' AND senha = '"+ senha +"'";
-      
+       String sql = "SELECT usuario.* FROM responsavel" +
+                    "LEFT JOIN usuario ON usuario.idUsuario = responsavel.idUsuario_FK" +
+                    "WHERE usuario.login = '"+usuario+"' AND usuario.senha='"+senha+"'";   
+       
        ArrayList<Usuario> lista;
        
        try(PreparedStatement stmt = this.query(sql))
@@ -149,6 +148,7 @@ public class ResponsavelDAO extends UsuarioDAO{
        
        return (lista.size() > 0) ? lista.get(0) : null;
     }
+     
      
       public Usuario respConsultarFilhos(Responsavel resp) throws SQLException{
         
