@@ -85,27 +85,7 @@ public class ResponsavelDAO extends UsuarioDAO{
         return lista;
     }
     
-    private ArrayList<Usuario> listarUser(ResultSet resultset) throws SQLException
-    {
-        ArrayList<Usuario> lista = new ArrayList<>();
-        
-        while(resultset.next()) 
-        {
-            Usuario item = new Usuario();
-            
-           
-            item.setNome(resultset.getString("nome"));
-            item.setLogin(resultset.getString("login"));
-            item.setTipoUsuario(resultset.getString("tipoUsuario"));
-            item.setNome(resultset.getString("nome"));
-             
-            lista.add(item);
-        }
-        
-        resultset.close();
-        return lista;
-    }
-    
+       
     
     private ArrayList<Aluno> listarAluno(ResultSet resultset) throws SQLException
     {
@@ -136,13 +116,13 @@ public class ResponsavelDAO extends UsuarioDAO{
        String sql = "SELECT usuario.* FROM responsavel" +
                     "LEFT JOIN usuario ON usuario.idUsuario = responsavel.idUsuario_FK" +
                     "WHERE usuario.login = '"+usuario+"' AND usuario.senha='"+senha+"'";   
-       
+       Usuario user = new Usuario();
        ArrayList<Usuario> lista;
        
        try(PreparedStatement stmt = this.query(sql))
        {
            ResultSet rs = stmt.executeQuery();
-           lista = this.listarUser(rs);
+           lista = user.listarUser(rs);
            stmt.close();
        }
        
@@ -201,33 +181,18 @@ public class ResponsavelDAO extends UsuarioDAO{
                     "INNER JOIN responsavel \n" +
                     "ON usuario.idUsuario = responsavel.idUsuario_FK\n" +
                     "WHERE idResponsavel = " + id + "" ;
-        
+        Usuario user = new Usuario();
         try (PreparedStatement stmt = this.query(qr)) 
         {
            // stmt.setInt(1,id);
             ResultSet rs = stmt.executeQuery();
             lista = this.listar(rs);
             ResultSet rs2 = stmt.executeQuery();
-            lista2 = this.listarUser(rs2);
+            lista2 = user.listarUser(rs2);
           //  rs.close();
            
         }
-        
-         for(Usuario user : lista2)
-        {
-          System.out.println("Nome: " + user.getNome()); 
-          System.out.println("Tipo User:" + user.getTipoUsuario());
-        }
-         
-        for (Responsavel resp : lista) 
-        {
-           
-            System.out.println("Email: " + resp.getCpf());
-            System.out.println("Endereço: " + resp.getEmail());
-            System.out.println("\n");
-        }
 
-         // concatenarListas(lista,lista2);
          return lista;
     }  
       
