@@ -31,3 +31,8 @@
 
 	margin:20px auto;
 }
+
+.bg{
+
+	background-image: url("../img/sample-1.jpg");
+}
