@@ -1,6 +1,9 @@
 package com.ihungre.model;
 
 import com.ihungry.model.dao.ProdutoDAO;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class Produto {
     
@@ -73,20 +76,7 @@ public class Produto {
         this.quantidade = quantidade;
     }
     
-    public boolean cadastrar (Produto produto) throws Exception {
-
-          boolean resposta = true;
-         try {
-              ProdutoDAO prod = new ProdutoDAO();
-              resposta = prod.cadastrar(produto);
-              
-            
-         } catch (Exception e) {
-             System.out.println(e.getMessage());
-         }
-       
-        return resposta;
-    }
+    
     
     public boolean bloquearOuAtt(Produto produto,int operacao){
         /* Operacao 1 = atualizar
@@ -112,9 +102,8 @@ public class Produto {
     }
     
      public boolean deletarProduto(Produto produto){
-        
-        
-          boolean resposta = true;
+
+         boolean resposta = true;
          try {
               ProdutoDAO prod = new ProdutoDAO();
               this.status = 0;
@@ -130,7 +119,31 @@ public class Produto {
     
     }
      
-     
+     public ArrayList<Produto> listarProduto(ResultSet resultset) throws SQLException
+    {
+        ArrayList<Produto> lista = new ArrayList<>();
+        ProdutoDAO prod = new ProdutoDAO();
+        
+        while(resultset.next()) 
+        {
+            Produto item = new Produto();
+            
+           
+            item.setCodigo(resultset.getString("codigo"));
+            item.setNome(resultset.getString("nome"));
+            item.setTipo(resultset.getString("tipo"));
+            item.setPreco(resultset.getDouble("preco"));
+            item.setObservacao(resultset.getString("observacao"));
+            item.setQuantidade(resultset.getInt("quantidade"));
+            item.setStatus(resultset.getInt("status"));
+            
+             
+            lista.add(item);
+        }
+        
+        //resultset.close();
+        return lista;
+    } 
     
 
 

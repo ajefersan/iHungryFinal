@@ -37,7 +37,7 @@ public class ProdutoDAO extends ConnectionFactory{
         }
     return resposta;
     }
-    private ArrayList<Produto> listar(ResultSet resultset) throws SQLException
+    public ArrayList<Produto> listar(ResultSet resultset) throws SQLException
     {
         ArrayList<Produto> lista = new ArrayList<>();
         
@@ -78,16 +78,18 @@ public class ProdutoDAO extends ConnectionFactory{
     public boolean atualizar(Produto item) throws SQLException 
     {   
         boolean resposta = true;
-        String qr = "UPDATE produto SET codigo=?, nome=?, preco=? , quantidade=? , status=? , tipo=?, observacao WHERE idProduto=?";
+        String qr = "UPDATE produto SET codigo=?, nome=?, tipo=? , preco=? , observacao=? , quantidade=?,status=? WHERE idProduto=?";
         try(PreparedStatement stmt = this.query(qr)) 
         {
             stmt.setString(1, item.getCodigo());
             stmt.setString(2, item.getNome());
-            stmt.setDouble(3, item.getPreco());
-            stmt.setInt(4, item.getQuantidade());
-            stmt.setDouble(5, item.getStatus());
-            stmt.setString(6, item.getTipo());
-            stmt.setString(7, item.getObservacao());
+            stmt.setString(3, item.getTipo());
+            stmt.setDouble(4, item.getPreco());
+            stmt.setString(5, item.getObservacao());
+            stmt.setInt(6, item.getQuantidade());
+            stmt.setInt(7, item.getStatus());
+            stmt.setInt(8, this.pegaId(item.getCodigo()));
+           
                         
             stmt.execute();
             stmt.close();
@@ -114,6 +116,31 @@ public class ProdutoDAO extends ConnectionFactory{
         return resposta;
     }
      
+    
+    public int pegaId(String codigo){
+    
+    int id = 0;
+    String qr = "SELECT idProduto FROM produto where codigo = '"+ codigo + "'";   
+    
+   
+          try (PreparedStatement stmt = this.query(qr)) 
+        {
+           // stmt.setInt(1,id);
+           
+            ResultSet rs = stmt.executeQuery();
+            rs.next();
+             id = rs.getInt("idProduto");
+             System.out.println(id + "imprimi isso");
+           
+        }catch(Exception e ){
+            System.out.println(e.getMessage() + "Entrei nesse");
+        }
+          
+          return id;
+    
+    
+    
+    }
      
      
 }
