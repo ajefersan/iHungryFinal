@@ -94,4 +94,29 @@ public class UsuarioDAO extends ConnectionFactory{
             stmt.close();
         }
     }
+    
+    
+       public Usuario logar(String login , String senha){
+         String qr = "SELECT * FROM usuario WHERE login = '" +login  + "' and senha ='" + senha + "'";
+          Usuario user = new Usuario();
+         try (PreparedStatement stmt = this.query(qr)) 
+        {
+            ResultSet rs = stmt.executeQuery();
+            rs.next();
+               
+                user.setLogin(rs.getString("login"));
+                user.setNome(rs.getString("nome"));
+                user.setSenha(rs.getString("senha"));
+                user.setTipoUsuario(rs.getString("tipoUsuario"));
+                user.setIdUsuario(rs.getInt("idUsuario"));
+                
+                return user;
+                
+        }catch(Exception e){
+            System.out.println(e.getMessage()+ "TO AQUI PORRA");
+            user = null;
+        }
+         
+         return user;
+    }
 }
