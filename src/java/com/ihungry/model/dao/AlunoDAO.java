@@ -161,7 +161,8 @@ public class AlunoDAO extends UsuarioDAO{
      
      
      }
-      
+     
+       
     public float consultarSaldo(String matricula){
         float saldo = 0;
         String qr = "SELECT saldo FROM aluno WHERE matricula = '" + matricula + " '" ;
@@ -214,5 +215,31 @@ public class AlunoDAO extends UsuarioDAO{
             stmt.close();
         }
     }
+    
+   
+    
+    public Usuario loginAluno(String usuario,String senha) throws SQLException{
+        
+       String sql = "SELECT usuario.* FROM aluno" +
+                    "LEFT JOIN usuario ON usuario.idUsuario = aluno.idUsuario_FK" +
+                    "WHERE usuario.login = '"+usuario+"' AND usuario.senha='"+senha+"'";   
+       
+       Usuario user = new Usuario();
+       
+       ArrayList<Usuario> lista;
+       
+       try(PreparedStatement stmt = this.query(sql))
+       {
+           ResultSet rs = stmt.executeQuery();
+           lista = user.listarUser(rs);
+           stmt.close();
+       }
+       
+       return (lista.size() > 0) ? lista.get(0) : null;
+    }
+    
+   
+    
+     
 }
 
