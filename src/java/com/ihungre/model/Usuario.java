@@ -39,6 +39,10 @@ public class Usuario {
         this.senha = senha;
     }
 
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
     public String getTipoUsuario() {
         return tipoUsuario;
     }

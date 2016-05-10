@@ -10,12 +10,11 @@
     wow.init();
 
    $(document).ready(function(){
-    $('.scrollspy').scrollSpy();
-
-    $('#menu, .subs').localScroll({
-         target:'body',
-         axis:'xy',
-         queue:true //one axis at a time
+     //one axis at a time
+        $(".element").typed({
+        strings: ["Mate sua forme com alguns clicks.", "Sem gastar muito."],
+        typeSpeed: -1
+      });
       });
       
       
@@ -25,4 +24,4 @@
   
   
   
-      });
+     
