@@ -15,7 +15,7 @@ public class AlunoDAO extends UsuarioDAO{
         
         int idReturn = 0;
         String qrUs = "INSERT INTO usuario(login,senha,nome,tipoUsuario) VALUES (?,?,?,?)";  
-        String qrAl = "INSERT INTO aluno (matricula,turma,turno,saldo,idUsuario_FK,idResponsavel_FK) VALUES (?,?,?,?,?,?)";
+        String qrAl = "INSERT INTO aluno (matricula,turma,turno,saldo,idUsuario_FK,idResponsavel_FK,idEscola_FK) VALUES (?,?,?,?,?,?,?)";
         int idResp = this.pegarIdResponsavel(cpf);                                                           
             
         try(PreparedStatement stmt = this.query(qrUs , Statement.RETURN_GENERATED_KEYS))
@@ -46,6 +46,7 @@ public class AlunoDAO extends UsuarioDAO{
             stmt.setDouble(4, aluno.getSaldo());
             stmt.setInt(5, idReturn);
             stmt.setInt(6, idResp);
+            stmt.setInt(7, aluno.getIdEscola());
             
          //   stmt.setString(7, Integer.toString(aluno.getIdEscola()));
            

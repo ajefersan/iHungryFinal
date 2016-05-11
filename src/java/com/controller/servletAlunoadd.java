@@ -6,6 +6,7 @@
 package com.controller;
 
 import com.ihungre.model.Aluno;
+import com.ihungry.model.dao.EscolaDAO;
 import java.io.IOException;
 
 import static java.lang.System.out;
@@ -39,6 +40,7 @@ public class servletAlunoadd extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
          boolean resposta = true;
          Aluno aluno = new Aluno();
+         EscolaDAO escola  = new EscolaDAO(); 
          String saldo = request.getParameter("saldo");
          String cpfResponsavel = request.getParameter("cpf");
          
@@ -52,6 +54,7 @@ public class servletAlunoadd extends HttpServlet {
          aluno.setSenha(request.getParameter("senha"));
          aluno.setLogin(request.getParameter("login"));
          aluno.setTipoUsuario("ALUNO");
+         aluno.setIdEscola(escola.pegarIdEscola("escola"));
          
          
          try{
