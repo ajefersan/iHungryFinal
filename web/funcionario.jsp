@@ -1,3 +1,5 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
 <!doctype html>
 <html lang="pt-br">
   <head>
@@ -83,8 +85,8 @@
           </div>
         </header>
         <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
-          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Cadastrar</a>
-          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">inbox</i>Produto</a>
+          <a class="mdl-navigation__link" href="?pagina=cadResponsavel"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Cadastrar</a>
+          <a class="mdl-navigation__link" href="?pagina=cadProduto"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">inbox</i>Produto</a>
          
           
           
@@ -96,56 +98,19 @@
       <main class="mdl-layout__content mdl-color--grey-100">
         <div class="mdl-grid demo-content">
             <div class="demo-graphs mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--8-col">
-              <form action="http://localhost:8083/iHungry/servletResponsavelAdd" name="form" >
-                  <div class="mdl-card__supporting-text">
-                     <h4 align="center">Cadastro de Funcionarios </h4>
-                   
-                  </div>
-
-                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                      <input class="mdl-textfield__input" name="nome" type="text" id="sample3">
-                      <label class="mdl-textfield__label" for="sample3">Nome...</label>
-                  </div>
-
-                   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                      <input class="mdl-textfield__input" type="text" name="cpf" pattern="-?[0-9]*(\.[0-9]+)?" id="sample2">
-                      <label class="mdl-textfield__label" for="sample2">Cpf...</label>
-                      <span class="mdl-textfield__error">Apenas numeros neste campo!</span>
-                  </div>
-
-
-                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                      <input class="mdl-textfield__input" name="email" type="email" id="sample3">
-                      <label class="mdl-textfield__label" for="sample3">Email...</label>
-                </div>
-
-
-                   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                      <input class="mdl-textfield__input" type="text" name="telefone" pattern="-?[0-9]*(\.[0-9]+)?" id="sample5">
-                      <label class="mdl-textfield__label" for="sample5">Telefone...</label>
-                      <span class="mdl-textfield__error">Apenas numeros neste campo!</span>
-                  </div>
-
-                 
-
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                      <input class="mdl-textfield__input" name="login" type="text" id="sample3">
-                      <label class="mdl-textfield__label" for="sample3">Login...</label>
-                </div>
-
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                      <input class="mdl-textfield__input" name="senha" type="password" id="sample3">
-                      <label class="mdl-textfield__label" for="sample3">Senha...</label>
-                </div>
-
-  
-            
-                <button  type="submit"class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
-                  Cadastrar
-                </button>
-                
-              </form>
               
+              <!-- Conteudo sera  incluido aqui -->
+
+                 <c:choose>
+                     <c:when test="${param.pagina != null}">
+                        <jsp:include page="funcionario/${param.pagina}.jsp"/>
+                        Entrei sem parametro
+                        
+                    </c:when>    
+                    <c:otherwise>
+                        <jsp:include page="erro.jsp" /> 
+                    </c:otherwise>
+                </c:choose>
 
 
             </div>

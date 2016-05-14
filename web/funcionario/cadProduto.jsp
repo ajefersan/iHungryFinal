@@ -1,23 +1,4 @@
-<%-- 
-    Document   : cadProduto
-    Created on : 08/05/2016, 19:01:02
-    Author     : jeferson
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link type="text/css" rel="stylesheet" href="../assets/css/materialize.min.css"  media="screen,projection"/>
-         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <title>Cadastro de Produto</title>
-    </head>
-    <body>
-      <div class="container row">
-        
-       
-        <form name="form"action="http://localhost:8083/iHungry/servletProdutoAdd" method="post" onsubmit="return validar();" class="col s8 offset-s2" >
+ <form name="form"action="http://localhost:8083/iHungry/servletProdutoAdd" method="post" onsubmit="return validar();" class="col s8 offset-s2" >
                 <div class="row">
                 <fieldset>
 
@@ -80,10 +61,3 @@
 
                
             </form>
-            </fieldset>
-        </div>  
-    
-     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-      <script type="text/javascript" src="../assets/js/materialize.min.js"></script>
-    </body>
-</html>
