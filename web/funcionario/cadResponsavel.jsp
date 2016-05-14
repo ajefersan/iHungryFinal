@@ -30,9 +30,7 @@
 						</div>
 						
 						
-						<div class="input-field col s2">
-							
-						</div>							
+											
 						
 						<div class="input-field col s12">
 							<input class="validate" type="text" name="cpf" placeholder="CPF"></input>
