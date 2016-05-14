@@ -1,6 +1,6 @@
 <form action="http://localhost:8083/iHungry/servletResponsavelAdd" name="form" >
                   <div class="mdl-card__supporting-text">
-                     <h4 align="center">Cadastro de Funcionarios </h4>
+                     <h4 align="center">Cadastro de Responsavel </h4>
                    
                   </div>
 

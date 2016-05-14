@@ -4,87 +4,64 @@
     Author     : jeferson
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-          <link type="text/css" rel="stylesheet" href="../assets/css/materialize.min.css"  media="screen,projection"/>
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <div class="container row">
+<form action="http://localhost:8083/iHungry/servletAlunoadd" >
+		<div class="mdl-card__supporting-text">
+                 <h4 align="center">Cadastro de Alunos </h4>
+                   
+        </div>
 		
-		<div class="col s12 offset-s2">
-			<form name="form" onsubmit="return validar();" action="http://localhost:8083/iHungry/servletAlunoadd" class="col s8 ">
-				<div class="row">
-
-					<fieldset>
-
-						<div class="input-field col s12">
-							<h4>Cadastrar Aluno</h4>	
-						</div>
-                                            
-                                            <div class="input-field col s12">
-
-							<input class="validate" type="text" placeholder="cpf do responsavel" name="cpf"></input>
-							
-						</div>
-
-						<div class="input-field col s12">
-
-							<input class="validate" type="text" placeholder="Matricula" name="matricula"></input>
-							
-						</div>
+		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" name="cpf" type="text" id="sample3">
+                <label class="mdl-textfield__label" for="sample3">Cpf...</label>
+         </div>
+       
+				
+		 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" name="nome" type="text" id="sample3">
+                <label class="mdl-textfield__label" for="sample3">Nome...</label>
+         </div>
 
 
-						
-						
-						
-						<div class="input-field col s12">
-							<input class="validate" type="text" name="turma" placeholder="Turma">
-						</div>	
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" name="matricula" type="text" id="sample3">
+                <label class="mdl-textfield__label" for="sample3">Matricula...</label>
+         </div>
 
-						<div class="input-field col s12">					
-							<input class="validate" type="text" name="nome" placeholder="Nome do Aluno"></input>	
+		 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" name="turma" type="text" id="sample3">
+                <label class="mdl-textfield__label" for="sample3">Turma...</label>
+         </div>
 
-						</div>
-						<div class="input-field col s12">					
-							<input class="validate" type="text" name="login" placeholder="login do Aluno"></input>	
-						</div>
-						<div class="input-field col s12">					
-							<input class="validate" type="password" name="senha" placeholder="Senha do Aluno"></input>	
-						</div>
-						<div class="input-field col s12">					
-							<input class="validate" type="number" name="saldo" placeholder="Saldo do Aluno"></input>	
-						</div>
-						<br>
-						<div class="input-field col s12">
+
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" name="login" type="text" id="sample3">
+                <label class="mdl-textfield__label" for="sample3">Login...</label>
+         </div>
+
+
+         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" name="senha" type="password" id="sample3">
+                <label class="mdl-textfield__label" for="sample3">Senha...</label>
+          </div>
+
+
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" name="saldo" pattern="-?[0-9]*(\.[0-9]+)?" id="sample5">
+                <label class="mdl-textfield__label" for="sample5">Saldo...</label>
+                <span class="mdl-textfield__error">Apenas numeros neste campo!</span>
+        </div>
 						    
-						  	<select name="turno" class="browser-default" >
-						  		<option value="" disabled selected>Escolha o Turno</option>
-						    	<option value="matutino">Matutino</option>
-							    <option value="noturno">Vespertino</option>
-							    <option value="integral">Integral</option>
-						  	</select>
-							<br>
-							<div class="col s12">
-								<button class="btn waves-effect waves-light" type="submit" name="action">Enviar
-							   
-								</button>
-								<button class="btn waves-effect waves-light" type="submit" name="consultar">Consultar
-							   
-								</button>
-							</div>
+		<select name="turno" class="browser-default" >
+				<option value="" disabled selected>Escolha o Turno</option>
+				<option value="matutino">Matutino</option>
+				<option value="noturno">Vespertino</option>
+				<option value="integral">Integral</option>
+		</select>
+		<br>
 							
-		        		</div>
-					</fieldset>
-			</form>	
-		</div>	
-	</div>
-
-    </body>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-     <script type="text/javascript" src="../assets/js/materialize.min.js"></script>
-     <script type="text/javascript" src="../assets/js/jQuery.js"></script>
-</html>
+		<button  type="submit"class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+             Cadastrar
+         </button>
+					
+</form>	
+	
