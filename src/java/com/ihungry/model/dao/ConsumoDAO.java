@@ -87,13 +87,14 @@ public class ConsumoDAO extends ConnectionFactory {
         {
             stmt.setDate(1, (Date) item.getData());
             stmt.setInt(2, item.getIdProduto());
-            stmt.setInt(9, item.getIdConsumo());
+            stmt.setInt(3, item.getIdConsumo());
             
             stmt.execute();
             stmt.close();
         }
     }
-
+    
+    
     public void deletar(Consumo item) throws SQLException 
     {   
         String qr = "DELETE FROM consumo WHERE id=?";
