@@ -195,11 +195,7 @@ public class ResponsavelDAO extends UsuarioDAO{
 
          return lista;
     }  
-      
-   
-    
-     
-   
+
     public void atualizar(Responsavel item) throws SQLException 
     {   
         String qr = "UPDATE responsavel SET nome=?, cpf=?, telefone=? , idUsuario_FK=? WHERE idResponsavel=?";
@@ -240,19 +236,20 @@ public class ResponsavelDAO extends UsuarioDAO{
         }
     }
        
-    public Double consultarSaldo(int idAluno) throws SQLException
+    public Double consultarSaldo(String matricula) throws SQLException
     {
         Double val = 0.0;
         
-        try(PreparedStatement stmt = this.query("SELECT saldo FROM aluno WHERE idAluno = ?"))
+        try(PreparedStatement stmt = this.query("SELECT saldo FROM aluno WHERE matricula = ?"))
         {
-            stmt.setInt(1, idAluno);
+            stmt.setString(1, matricula);
             
             ResultSet rs = stmt.executeQuery();
             
             while(rs.next())
             {
                 val = rs.getDouble("saldo");
+                System.out.println(val);
             }
             
         }
@@ -260,13 +257,13 @@ public class ResponsavelDAO extends UsuarioDAO{
         return val;
     }
     
-    private void atualizarSaldo(Double valor,Integer id) throws SQLException 
+    private void atualizarSaldo(Double valor,String matricula) throws SQLException 
     {   
-        String qr = "UPDATE aluno SET saldo = ? WHERE idAluno = ?";
+        String qr = "UPDATE aluno SET saldo = ? WHERE matricula = ?";
         try(PreparedStatement stmt = this.query(qr)) 
         {
-            stmt.setInt(2, id);
             stmt.setDouble(1, valor);
+            stmt.setString(2, matricula);
             
             stmt.execute();
             stmt.close();
@@ -274,10 +271,10 @@ public class ResponsavelDAO extends UsuarioDAO{
     }
       
    
-    public void addCredito(int idAluno, Double valor) throws SQLException
-    {
-        Double nValor = this.consultarSaldo(idAluno) + valor;
-        this.atualizarSaldo(nValor,idAluno);
+    public void addCredito(String matricula, Double valor) throws SQLException
+    {     
+        Double nValor = this.consultarSaldo(matricula) + valor;
+        this.atualizarSaldo(nValor,matricula);
     }
     
     public void consultarRespPorId(Integer item) throws SQLException 
