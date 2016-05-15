@@ -1,4 +1,8 @@
- <form name="form"action="http://localhost:8083/iHungry/servletProdutoAdd" >
+<div class="mdl-grid demo-content">
+
+<div class="demo-graphs mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--8-col">
+
+<form name="form"action="http://localhost:8083/iHungry/servletProdutoAdd" >
      <div class="mdl-card__supporting-text">
             <h4 align="center">Cadastro de Produtos </h4>
                    
@@ -53,12 +57,9 @@
 
              <button  type="submit"class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
                   Cadastrar
-            </button>          
-
-                       
-
-                       
-                        
-                       
+            </button>                      
                
             </form>
+    
+</div>
+</div>

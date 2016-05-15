@@ -1,3 +1,7 @@
+ <div class="mdl-grid demo-content">
+
+<div class="demo-graphs mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--8-col">
+
 <form action="http://localhost:8083/iHungry/servletResponsavelAdd" name="form" >
                   <div class="mdl-card__supporting-text">
                      <h4 align="center">Cadastro de Responsavel </h4>
@@ -47,4 +51,7 @@
                 </button>
                 
               </form>
-              
+  </div>
+     
+     
+ </div>

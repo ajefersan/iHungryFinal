@@ -9,9 +9,11 @@
 <%@page import="com.ihungry.model.dao.ProdutoDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="mdl-grid mdl-card__supporting-text">
-    <h4 style="text-align: center;"> Produtos Cadastrados</h4>
+    
     
 <table class="mdl-data-table mdl-js-data-table  mdl-cell ">
+    <caption><h4>Produtos cadastrados </h4></caption>
+ 
   <thead>
     <tr>
       <th class="mdl-data-table__cell--non-numeric">Nome</th>
@@ -20,6 +22,9 @@
       <th>Preco</th>
       <th>Quantidade</th>
       <th>Status</th>
+      <th>Apagar</th>
+      <th>Alterar</th>
+      
     </tr>
   </thead>
   
@@ -39,7 +44,10 @@
             <td> R$ <% out.print(p.getPreco()); %></td>
               <td> <%  out.print(p.getQuantidade());  %> </td>
             <td class="mdl-data-table__cell--non-numeric"> <% out.print(p.printStatus(p.getStatus())); %></td>
-    </tr>
+            <td class="mdl-data-table__cell--non-numeric"><a  class="mdl-color--red mdl-button mdl-js-button mdl-button--raised "href="#">Apagar</a></td>
+   
+            <td class="mdl-data-table__cell--non-numeric"><a class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" href="#">Alterar</a></td>
+     </tr>
     
     <%  
             }
