@@ -43,6 +43,7 @@ public class AcaoProduto extends HttpServlet {
         if(acao.equals("excluir")){
             ProdutoDAO produto = new ProdutoDAO();
             produto.deletar(id);
+            response.sendRedirect("funcionario.jsp?pagina=listarProduto");
         
         }
     }

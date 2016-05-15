@@ -9,6 +9,10 @@ public class Produto {
     
     private int idProduto;
     private String codigo;
+
+    public void setIdProduto(int idProduto) {
+        this.idProduto = idProduto;
+    }
     private String nome;
     private Double preco;
     private String tipo;
