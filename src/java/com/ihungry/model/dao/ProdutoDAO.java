@@ -137,10 +137,29 @@ public class ProdutoDAO extends ConnectionFactory{
         }
           
           return id;
-    
-    
-    
     }
      
+    public int pegaSaldo(String codigo){
+    
+    int id = 0;
+    String qr = "SELECT idProduto FROM produto where codigo = '"+ codigo + "'";   
+    
+   
+          try (PreparedStatement stmt = this.query(qr)) 
+        {
+           // stmt.setInt(1,id);
+           
+            ResultSet rs = stmt.executeQuery();
+            rs.next();
+             id = rs.getInt("idProduto");
+             System.out.println(id + "imprimi isso");
+           
+        }catch(Exception e ){
+            System.out.println(e.getMessage() + "Entrei nesse");
+        }
+          
+          return id;
+   
+    }
      
 }
