@@ -15,9 +15,10 @@
   <thead>
     <tr>
       <th class="mdl-data-table__cell--non-numeric">Nome</th>
+      <th>Codigo</th>
       <th class="mdl-data-table__cell--non-numeric">Tipo</th>
       <th>Preco</th>
-      <th>Codigo</th>
+      <th>Quantidade</th>
       <th>Status</th>
     </tr>
   </thead>
@@ -30,13 +31,13 @@
             for(Produto p : lista ){
                 
       %>
-  
+    
      <tr>
             <td class="mdl-data-table__cell--non-numeric"> <% out.print(p.getNome());  %></td>
             <td><% out.print(p.getCodigo()); %></td>
             <td class="mdl-data-table__cell--non-numeric"> <% out.print(p.getTipo()); %></td>
             <td> R$ <% out.print(p.getPreco()); %></td>
-            <td <% out.print(p.getQuantidade()); %>></td>
+              <td> <%  out.print(p.getQuantidade());  %> </td>
             <td class="mdl-data-table__cell--non-numeric"> <% out.print(p.printStatus(p.getStatus())); %></td>
     </tr>
     
