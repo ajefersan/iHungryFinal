@@ -26,11 +26,11 @@ public class AlunoDAO extends UsuarioDAO{
             stmt.setString(4, aluno.getTipoUsuario());
             stmt.execute();
             ResultSet rs = stmt.getGeneratedKeys();  
-            if (rs.next())
-                idReturn = rs.getInt(1);
-
             
+            if (rs.next())
+                idReturn = rs.getInt(1);   
         }
+        
         System.out.println("ok user");
         
         if(idReturn == 0)
@@ -39,7 +39,6 @@ public class AlunoDAO extends UsuarioDAO{
         try(PreparedStatement stmt = this.query(qrAl))    
         {
 
-           
             stmt.setString(1, aluno.getMatricula());
             stmt.setString(2, aluno.getTurma());
             stmt.setString(3, aluno.getTurno());
@@ -47,9 +46,7 @@ public class AlunoDAO extends UsuarioDAO{
             stmt.setInt(5, idReturn);
             stmt.setInt(6, idResp);
             stmt.setInt(7, aluno.getIdEscola());
-            
-         //   stmt.setString(7, Integer.toString(aluno.getIdEscola()));
-           
+          
             stmt.execute();
             stmt.close(); 
             System.out.println("ok aluno!");
@@ -60,7 +57,7 @@ public class AlunoDAO extends UsuarioDAO{
     }   
      
      
-    private ArrayList<Aluno> listar(ResultSet resultset) throws SQLException
+    public ArrayList<Aluno> listar(ResultSet resultset) throws SQLException
     {
         ArrayList<Aluno> lista = new ArrayList<>();
         
@@ -74,8 +71,8 @@ public class AlunoDAO extends UsuarioDAO{
             item.setTurno(resultset.getString("turno"));
             item.setSaldo(resultset.getDouble("saldo"));
             item.setIdUsuario(resultset.getInt("idUsuario_FK"));
-           // item.setIdResponsavel(resultset.getInt("idResponsavel_FK"));
-           // item.setIdEscola(resultset.getInt("idEscola_FK"));
+            item.setIdResponsavel(resultset.getInt("idResponsavel_FK"));
+            item.setIdEscola(resultset.getInt("idEscola_FK"));
             
             
             lista.add(item);
@@ -127,17 +124,14 @@ public class AlunoDAO extends UsuarioDAO{
             ResultSet rs = stmt.executeQuery();
             rs.next();
              id = rs.getInt("idResponsavel");
-             System.out.println(id + "imprimi isso");
+             System.out.println("Deu certo ID :" +id);
            
         }catch(Exception e ){
-            System.out.println(e.getMessage() + "Entrei nesse");
+            System.out.println(e.getMessage() + "Deu Merda");
         }
           
           return id;
-         
-     
-     
-     }
+    }
       
        public int pegarIdUsuario(String matricula )throws SQLException {
          int id = 0;
@@ -238,7 +232,24 @@ public class AlunoDAO extends UsuarioDAO{
        return (lista.size() > 0) ? lista.get(0) : null;
     }
     
-   
+    public int pegarIdAluno(String codigo)throws SQLException {
+         int id = 0;
+         String qr = "SELECT idAluno FROM aluno WHERE matricula = '"+codigo+"'";
+         
+          try (PreparedStatement stmt = this.query(qr)) 
+        {
+           // stmt.setInt(1,id);
+           
+            ResultSet rs = stmt.executeQuery();
+            rs.next();
+            id = rs.getInt("idAluno");
+                      
+        }catch(Exception e ){
+            System.out.println(e.getMessage() + "Deu Merda");
+        }
+          
+          return id;
+    }
     
      
 }
