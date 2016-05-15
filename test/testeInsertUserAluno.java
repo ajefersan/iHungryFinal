@@ -1,11 +1,14 @@
 
 import com.ihungre.model.Aluno;
+import com.ihungre.model.Produto;
 import com.ihungre.model.Responsavel;
 import com.ihungre.model.Usuario;
 import com.ihungry.model.dao.AlunoDAO;
+import com.ihungry.model.dao.ProdutoDAO;
 import com.ihungry.model.dao.ResponsavelDAO;
 import static com.ihungry.model.dao.ResponsavelDAO.idReturnP;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class testeInsertUserAluno {
     
@@ -35,7 +38,7 @@ public class testeInsertUserAluno {
       user.setNome("coroa");*/
        
       //matricula,turma,turno,saldo,idUsuario_FK,idResponsavel_FK,idEscola_FK
-      Aluno aluno = new Aluno();
+      /*  Aluno aluno = new Aluno();
       aluno.setMatricula("3aa3ssddssjjddjkkccmsssrlw31");
       aluno.setTurma("B");
       aluno.setTurno("VES");
@@ -50,9 +53,19 @@ public class testeInsertUserAluno {
         alunoDAO.cadastrar(aluno,"cpf3"); 
      Responsavel res = new Responsavel();
         res.depositarCredito(aluno, 500,"cpf3");
-        System.out.println(aluno.consultarSaldo(aluno.getMatricula()));
+        System.out.println(aluno.consultarSaldo(aluno.getMatricula()));*/
+      
     
-    } 
+    ProdutoDAO prod = new ProdutoDAO();
+    
+    ArrayList<Produto> lista = prod.consultar();
+    
+    for (Produto p : lista )
+        
+        System.out.println(p.getNome());
+    
      
+   
+}
    
 }

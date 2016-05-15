@@ -46,8 +46,14 @@ public class servletProdutoAdd extends HttpServlet {
         produto.setPreco(Double.parseDouble(request.getParameter("preco")));
         produto.setQuantidade(Integer.parseInt(request.getParameter("quantidade")));
         produto.setStatus(1);
+        Object p;
+        
+        request.setAttribute("produto", produto);
+
+    
+    
         try{
-          if(resposta =  prod   .cadastrar(produto)){
+          if(resposta =  prod.cadastrar(produto)){
              RequestDispatcher rd = request.getRequestDispatcher("cadastrador.jsp");
              rd.include(request, response);
         

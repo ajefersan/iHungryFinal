@@ -50,8 +50,8 @@ public class ProdutoDAO extends ConnectionFactory{
             item.setPreco(resultset.getDouble("preco"));
             item.setQuantidade(resultset.getInt("quantidade"));
             item.setStatus(resultset.getInt("status"));
-            item.setPreco(resultset.getDouble("tipo"));
-            item.setQuantidade(resultset.getInt("observacao"));
+            item.setTipo(resultset.getString("tipo"));
+            item.setObservacao(resultset.getString("observacao"));
             
             
            lista.add(item);

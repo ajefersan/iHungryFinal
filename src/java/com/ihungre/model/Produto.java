@@ -101,6 +101,16 @@ public class Produto {
     
     }
     
+    public String printStatus(int status){
+        
+        String mensagem = null;
+        if(status == 1) mensagem = "DISPONIVEL";
+        else if(status == 0) mensagem = "BLOQUEADO";
+        
+        return mensagem;
+    
+    }
+    
      public boolean deletarProduto(Produto produto){
 
          boolean resposta = true;

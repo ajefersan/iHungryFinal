@@ -87,6 +87,7 @@
         <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
           <a class="mdl-navigation__link" href="?pagina=cadResponsavel"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Cadastrar</a>
           <a class="mdl-navigation__link" href="?pagina=cadProduto"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">inbox</i>Produto</a>
+           <a class="mdl-navigation__link" href="?pagina=listarProduto"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">inbox</i>Consultar</a>
          
           
           
@@ -131,21 +132,7 @@
         </div>
       </main>
     </div>
-     <!-- <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" style="position: fixed; left: -1000px; height: -1000px;">
-        <defs>
-          <mask id="piemask" maskContentUnits="objectBoundingBox">
-            <circle cx=0.5 cy=0.5 r=0.49 fill="white">
-            <circle cx=0.5 cy=0.5 r=0.40 fill="black">
-          </mask>
-          <g id="piechart">
-            <circle cx=0.5 cy=0.5 r=0.5>
-            <path d="M 0.5 0.5 0.5 0 A 0.5 0.5 0 0 1 0.95 0.28 z" stroke="none" fill="rgba(255, 255, 255, 0.75)">
-          </g>
-        </defs>
-      </svg> -->
-    <!--  <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 500 250" style="position: fixed; left: -1000px; height: -1000px;">
-       
-      </svg>-->
+     
     <script src="assets/js/material.min.js"></script>
   </body>
 </html>
