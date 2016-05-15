@@ -58,11 +58,7 @@ public class testeInsertUserAluno {
     
     ProdutoDAO prod = new ProdutoDAO();
     
-    ArrayList<Produto> lista = prod.consultar();
-    
-    for (Produto p : lista )
-        
-        System.out.println(p.getNome());
+    prod.deletar(4);
     
      
    

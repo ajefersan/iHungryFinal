@@ -100,14 +100,15 @@ public class ProdutoDAO extends ConnectionFactory{
         return resposta;
     }
 
-    public boolean deletar(Produto item) throws SQLException 
+    public boolean deletar(int id) throws SQLException 
     {   boolean resposta = true;
         String qr = "DELETE FROM produto WHERE idProduto=?";
         try(PreparedStatement stmt = this.query(qr)) 
         {
-            stmt.setInt(1, item.getIdProduto());
+            stmt.setInt(1, id);
             stmt.execute();
             stmt.close();
+            
         }catch(Exception e ){
             System.out.println(e.getMessage());
             resposta = false;

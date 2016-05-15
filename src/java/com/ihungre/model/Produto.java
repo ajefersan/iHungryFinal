@@ -111,23 +111,7 @@ public class Produto {
     
     }
     
-     public boolean deletarProduto(Produto produto){
-
-         boolean resposta = true;
-         try {
-              ProdutoDAO prod = new ProdutoDAO();
-              this.status = 0;
-              resposta = prod.deletar(produto);
-              
-            
-         } catch (Exception e) {
-             System.out.println(e.getMessage());
-         }
-       
-        return resposta;
     
-    
-    }
      
      public ArrayList<Produto> listarProduto(ResultSet resultset) throws SQLException
     {
