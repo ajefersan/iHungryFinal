@@ -45,7 +45,7 @@ public class servletProdutoAdd extends HttpServlet {
         produto.setQuantidade(Integer.parseInt(request.getParameter("quantidade")));
         produto.setStatus(1);
         try{
-          if(resposta =  produto.cadastrar(produto)){
+          if(resposta =  produto.cadastrarProduto(produto)){
              RequestDispatcher rd = request.getRequestDispatcher("cadastrador.jsp");
              rd.include(request, response);
         
