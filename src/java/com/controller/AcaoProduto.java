@@ -57,10 +57,14 @@ public class AcaoProduto extends HttpServlet {
             
         
         }else if(acao.equals("bloquear")){
+            
+           try{
            Produto prod = produto.consultarPorId(id);
-           prod.bloquearOuAtt(prod, 2);
+           prod.bloquear(prod);
            response.sendRedirect("funcionario.jsp?pagina=listarProduto");
-        
+           }catch(Exception e){
+               System.out.println(e.getMessage());
+           }
         
         
         }
