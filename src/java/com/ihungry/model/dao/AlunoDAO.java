@@ -73,6 +73,7 @@ public class AlunoDAO extends UsuarioDAO{
             item.setIdUsuario(resultset.getInt("idUsuario_FK"));
             item.setIdResponsavel(resultset.getInt("idResponsavel_FK"));
             item.setIdEscola(resultset.getInt("idEscola_FK"));
+            item.setIdAluno(resultset.getInt("idAluno"));
             
             
             lista.add(item);
@@ -225,14 +226,17 @@ public class AlunoDAO extends UsuarioDAO{
         }
     }
 
-    public void deletar(Aluno item) throws SQLException 
+    public void deletar(int id) throws SQLException 
     {   
-        String qr = "DELETE FROM aluno WHERE id=?";
+        String qr = "DELETE FROM aluno WHERE idAluno=?";
         try(PreparedStatement stmt = this.query(qr)) 
         {
-            stmt.setInt(1, item.getIdUsuario());
+            stmt.setInt(1, id);
             stmt.execute();
             stmt.close();
+        }catch(Exception e ){
+            System.out.println(e.getMessage());
+        
         }
     }
     
