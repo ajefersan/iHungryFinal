@@ -5,6 +5,7 @@
  */
 package com.controller;
 
+import com.ihungre.model.Aluno;
 import com.ihungre.model.Produto;
 import com.ihungry.model.dao.AlunoDAO;
 import com.ihungry.model.dao.ProdutoDAO;
@@ -50,9 +51,9 @@ public class AcaoAluno extends HttpServlet {
             response.sendRedirect("responsavel.jsp?pagina=listarAluno");
         
         }else if(acao.equals("alterar")){
-            ProdutoDAO produto = new ProdutoDAO();
-            Produto prod = produto.consultarPorId(id);
-            request.setAttribute("aluno", prod);
+            AlunoDAO aluno = new AlunoDAO();
+            Aluno al = aluno.consultarPorId(id);
+            request.setAttribute("aluno", al);
             RequestDispatcher rd = request.getRequestDispatcher("responsavel.jsp?pagina=alterarAluno");
             rd.include(request, response);
             

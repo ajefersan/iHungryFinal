@@ -5,11 +5,14 @@
  */
 package com.controller;
 
-import com.ihungre.model.Produto;
-import com.ihungry.model.dao.ProdutoDAO;
+import com.ihungre.model.Aluno;
+import com.ihungry.model.dao.AlunoDAO;
+import com.ihungry.model.dao.EscolaDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,8 +24,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author jeferson
  */
-@WebServlet(name = "servletProdutoAlterar", urlPatterns = {"/servletProdutoAlterar"})
-public class servletProdutoAlterar extends HttpServlet {
+@WebServlet(name = "servletAlunoAlterar", urlPatterns = {"/servletAlunoAlterar"})
+public class servletAlunoAlterar extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,23 +37,26 @@ public class servletProdutoAlterar extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        Produto produto = new Produto();
-        ProdutoDAO prod = new ProdutoDAO();
-        boolean resposta = true;
+       boolean resposta = true;
+         Aluno aluno = new Aluno();
+         AlunoDAO al = new AlunoDAO();
+         EscolaDAO escola  = new EscolaDAO(); 
         
-        
-        produto.setCodigo(request.getParameter("codigo"));
-        produto.setNome(request.getParameter("nome"));
-        produto.setObservacao(request.getParameter("observacao"));
-        produto.setPreco(Double.parseDouble(request.getParameter("preco")));
-        produto.setQuantidade(Integer.parseInt(request.getParameter("quantidade")));
-        produto.setStatus(1);
-
+         aluno.setNome(request.getParameter("nome"));
+         aluno.setMatricula(request.getParameter("matricula"));
+         aluno.setTurma(request.getParameter("turma"));
+         aluno.setTurno(request.getParameter("turno"));
+         aluno.setSenha(request.getParameter("senha"));
+         aluno.setLogin(request.getParameter("login"));
+         aluno.setTipoUsuario("ALUNO");
+         aluno.setIdEscola(escola.pegarIdEscola("escola"));
+         
+         
         try{
-          if(resposta =  prod.atualizar(produto)){
-             RequestDispatcher rd = request.getRequestDispatcher("funcionario.jsp?pagina=listarProduto");
+          if(resposta =  al.atualizar(aluno)){
+             RequestDispatcher rd = request.getRequestDispatcher("responsavel.jsp?pagina=listarAluno");
              rd.include(request, response);
         
           }
@@ -73,7 +79,11 @@ public class servletProdutoAlterar extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(servletAlunoAlterar.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -87,7 +97,11 @@ public class servletProdutoAlterar extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(servletAlunoAlterar.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

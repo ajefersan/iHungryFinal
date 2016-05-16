@@ -86,7 +86,7 @@ public class Responsavel extends Usuario {
         return resposta;
     }
      
-    public void depositarCredito(Aluno aluno, float saldo,String cpf){
+    /*    public void depositarCredito(Aluno aluno, float saldo,String cpf){
         Double novoSaldo;
         
         
@@ -103,7 +103,7 @@ public class Responsavel extends Usuario {
         
     
     
-    }
+    }*/
     
     
 }

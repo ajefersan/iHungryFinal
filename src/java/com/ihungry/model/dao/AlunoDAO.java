@@ -100,17 +100,30 @@ public class AlunoDAO extends UsuarioDAO{
     
     
     
-    public void consultarPorId(Integer item) throws SQLException 
+    public Aluno  consultarPorId(int id) throws SQLException 
     {
-        String qr = "SELECT * FROM aluno WHERE idAluno = ?";
-        boolean id = false;
+        String qr = "SELECT usuario.nome,usuario.login, usuario.senha,usuario.idUsuario,aluno.* FROM usuario INNER JOIN aluno on IdUsuario = idUsuario_FK WHERE idAluno = " + id;
+        Aluno a = new Aluno();
         
         try(PreparedStatement stmt = this.query(qr))
         {   
-            stmt.setInt(1, item);
+ 
             ResultSet rs = stmt.executeQuery();
+            rs.next();
+            a.setNome(rs.getString("usuario.nome"));
+            a.setLogin(rs.getString("usuario.login"));
+            a.setSenha(rs.getString("usuario.senha"));
+            a.setIdUsuario(rs.getInt("usuario.idUsuario"));
+            a.setMatricula(rs.getString("matricula"));
+            a.setTurma(rs.getString("turma"));
+            a.setTurno(rs.getString("turno"));
+            a.setSaldo(rs.getDouble("saldo"));
             
+        }catch(Exception e ){
+            System.out.println(e.getMessage() + "Entrei consultaId aluno");
         }
+        
+        return a ;
         
     }
     
@@ -203,27 +216,41 @@ public class AlunoDAO extends UsuarioDAO{
     
     }
     
-    public void atualizar(Aluno item,String cpf) throws SQLException 
-    {   //adicionar idEscola_Fk qdo criar a tabela
-        String qr = "UPDATE aluno SET matricula=?, turma=? , turno=? , saldo=? , idUsuario_FK=?, idResponsavel_FK = ?  WHERE matricula = '" + item.getMatricula()+"'";
+    public boolean atualizar(Aluno item) throws SQLException 
+    {   
+        boolean resposta = true;
+        String qr = "UPDATE usuario SET nome = ? , login = ?, senha = ? WHERE idUsuario = ? ";
+        
         try(PreparedStatement stmt = this.query(qr)) 
+        {
+            
+            stmt.setString(1, item.getNome());
+            stmt.setString(2, item.getLogin());
+            stmt.setString(3, item.getSenha());
+            stmt.setInt(4, this.pegarIdUsuario(item.getMatricula()));
+            stmt.execute();
+            stmt.close();
+        }catch(Exception e){
+            System.out.println(e.getMessage()+ " ALUNO DAO atualizar ");
+            resposta = false;
+        }
+        String qr2 = "UPDATE aluno SET matricula=?, turma=? , turno=?  WHERE idAluno = ? " ;
+        try(PreparedStatement stmt = this.query(qr2)) 
         {
             //aluno nao tem nome
             stmt.setString(1, item.getMatricula());
             stmt.setString(2, item.getTurma());
             stmt.setString(3, item.getTurno());
-            stmt.setDouble(4, item.getSaldo());
-            stmt.setInt(5, this.pegarIdUsuario(item.getMatricula()));
-            stmt.setInt(6, this.pegarIdResponsavel(cpf));
-           // stmt.setInt(8, item.getIdEscola());
-           
-            
+            stmt.setInt(4, this.pegarIdAluno(item.getMatricula()));
             stmt.execute();
             stmt.close();
         }catch(Exception e){
         
-            System.out.println(e.getMessage()+ " ALUNO DAO");
+            System.out.println(e.getMessage()+ " ALUNO DAO atualizar ");
+            resposta = false;
         }
+        
+        return resposta ;
     }
 
     public void deletar(int id) throws SQLException 

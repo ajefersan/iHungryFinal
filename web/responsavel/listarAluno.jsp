@@ -47,7 +47,7 @@
             <td class="mdl-data-table__cell--non-numeric"> <%  out.print(a.getTurno());  %> </td>
             <td>R$ <% out.print(a.getSaldo()); %></td>
             <td class="mdl-data-table__cell--non-numeric"><a  class="mdl-color--red mdl-button mdl-js-button mdl-button--raised "href="AcaoAluno?acao=excluir&id=<% out.print(a.getIdAluno()); %>">Apagar</a></td>
-            <td class="mdl-data-table__cell--non-numeric"><a class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" href="AcaoProduto?acao=alterar&id=<% out.print(a.getIdAluno()); %>">Alterar</a></td>
+            <td class="mdl-data-table__cell--non-numeric"><a class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" href="AcaoAluno?acao=alterar&id=<% out.print(a.getIdAluno()); %>">Alterar</a></td>
      </tr>
     
     <%  
