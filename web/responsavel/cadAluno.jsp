@@ -50,15 +50,18 @@
                 <label class="mdl-textfield__label" for="sample5">Saldo...</label>
                 <span class="mdl-textfield__error">Apenas numeros neste campo!</span>
         </div>
-						    
-		<select name="turno" class="browser-default" >
+        <div class="input-field">
+		<select name="turno"  >
+                    <optgroup
 				<option value="" disabled selected>Escolha o Turno</option>
 				<option value="matutino">Matutino</option>
 				<option value="noturno">Vespertino</option>
 				<option value="integral">Integral</option>
+                    </optgroup>
 		</select>
 		<br>
-							
+            
+        </div>						
 		<button  type="submit"class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
              Cadastrar
          </button>

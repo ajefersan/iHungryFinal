@@ -30,6 +30,15 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/material.min.css">
     <link rel="stylesheet" href="assets/css/styles.css">
+    <script src="assets/js/material.min.js"></script>
+    <script src="assets/js/jQuery.js"></script>
+    <script type="text/javascript">
+        
+     $(document).ready(function() {
+        $('select').material_select();
+    });
+    </script>
+    
     <style>
     #view-source {
       position: fixed;
@@ -86,7 +95,7 @@
         </header>
         <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
           <a class="mdl-navigation__link" href="?pagina=cadAluno"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Cadastrar</a>
-          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">inbox</i>Produto</a>
+          <a class="mdl-navigation__link" href="?pagina=listarAluno"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">inbox</i>Listar</a>
          
           
           

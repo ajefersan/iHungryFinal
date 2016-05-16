@@ -85,9 +85,12 @@
           </div>
         </header>
         <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
+          <a>Responsavel</a>
           <a class="mdl-navigation__link" href="?pagina=cadResponsavel"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Cadastrar</a>
-          <a class="mdl-navigation__link" href="?pagina=cadProduto"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">inbox</i>Produto</a>
+          <a>Produto</a>
+          <a class="mdl-navigation__link" href="?pagina=cadProduto"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">inbox</i>Cadastrar</a>
            <a class="mdl-navigation__link" href="?pagina=listarProduto"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">inbox</i>Listar</a>
+            <a>Aluno</a>
            <a class="mdl-navigation__link" href="?pagina=consultarSaldo"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">inbox</i>Consultar</a>
           
           
