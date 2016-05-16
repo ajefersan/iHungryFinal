@@ -9,9 +9,11 @@ import java.util.ArrayList;
 
 public class ConsumoBloqueadoDAO extends ConnectionFactory{
     
-    public void cadastrar(ConsumoBloqueado consumo) throws SQLException
+    public boolean cadastrar(ConsumoBloqueado consumo) throws SQLException
     {   
-        String qr = "INSERT INTO consumo_bloqueado (idAluno_FK,idProduto_FK) VALUES (?,?,?)";
+        
+        boolean resposta = true;
+        String qr = "INSERT INTO consumo_bloqueado (idAluno_FK,idProduto_FK) VALUES (?,?)";
                                                                         
         
         try(PreparedStatement stmt = this.query(qr))
@@ -26,7 +28,12 @@ public class ConsumoBloqueadoDAO extends ConnectionFactory{
             stmt.close(); 
             System.out.println("Cad ok!");
         } catch (SQLException e){
+            
+            System.out.print(e.getMessage() + "enteri dao consumo bloqueado");
+            resposta = false;
         }
+        
+        return resposta;
     
     }
     private ArrayList<ConsumoBloqueado> listar(ResultSet resultset) throws SQLException
@@ -37,7 +44,7 @@ public class ConsumoBloqueadoDAO extends ConnectionFactory{
         {
             ConsumoBloqueado item = new ConsumoBloqueado();
             
-            item.setCod(resultset.getString("cod"));
+            
             item.setIdAluno(resultset.getInt("idAluno_FK"));
             item.setIdProduto(resultset.getInt("idProduto_FK"));
             
@@ -64,13 +71,13 @@ public class ConsumoBloqueadoDAO extends ConnectionFactory{
     
     public void atualizar(ConsumoBloqueado item) throws SQLException 
     {   
-        String qr = "UPDATE consumo_bloqueado SET cod=?, idAluno_FK=?, idProduto_FK=? WHERE idConsumo=?";
+        String qr = "UPDATE consumo_bloqueado SET  idAluno_FK=?, idProduto_FK=? WHERE idConsumo=?";
         try(PreparedStatement stmt = this.query(qr)) 
         {
-            stmt.setString(1, item.getCod());
-            stmt.setInt(2, item.getIdAluno());
-            stmt.setInt(3, item.getIdProduto());
-            stmt.setInt(4, item.getIdConsumoBloqueado());
+            
+            stmt.setInt(1, item.getIdAluno());
+            stmt.setInt(2, item.getIdProduto());
+            stmt.setInt(3, item.getIdConsumoBloqueado());
             
             stmt.execute();
             stmt.close();
