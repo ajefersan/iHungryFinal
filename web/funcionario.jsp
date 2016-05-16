@@ -88,7 +88,7 @@
           <a class="mdl-navigation__link" href="?pagina=cadResponsavel"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Cadastrar</a>
           <a class="mdl-navigation__link" href="?pagina=cadProduto"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">inbox</i>Produto</a>
            <a class="mdl-navigation__link" href="?pagina=listarProduto"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">inbox</i>Consultar</a>
-         
+           <a class="mdl-navigation__link" href="?pagina=consultaSaldo"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">inbox</i>Consultar</a>
           
           
           

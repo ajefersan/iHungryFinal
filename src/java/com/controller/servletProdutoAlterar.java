@@ -8,7 +8,7 @@ package com.controller;
 import com.ihungre.model.Produto;
 import com.ihungry.model.dao.ProdutoDAO;
 import java.io.IOException;
-
+import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,8 +20,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author jeferson
  */
-@WebServlet(name = "servletProdutoAdd", urlPatterns = {"/servletProdutoAdd"})
-public class servletProdutoAdd extends HttpServlet {
+@WebServlet(name = "servletProdutoAlterar", urlPatterns = {"/servletProdutoAlterar"})
+public class servletProdutoAlterar extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -49,12 +49,12 @@ public class servletProdutoAdd extends HttpServlet {
         produto.setStatus(1);
        
         
-        request.setAttribute("produto", produto);
+        
 
     
     
         try{
-          if(resposta =  prod.cadastrar(produto)){
+          if(resposta =  prod.atualizar(produto)){
              RequestDispatcher rd = request.getRequestDispatcher("cadastrador.jsp");
              rd.include(request, response);
         
@@ -65,8 +65,6 @@ public class servletProdutoAdd extends HttpServlet {
              RequestDispatcher rd = request.getRequestDispatcher("erro.jsp");
              rd.include(request, response);
         }
-        
-     
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

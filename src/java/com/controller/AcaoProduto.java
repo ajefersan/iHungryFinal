@@ -5,12 +5,14 @@
  */
 package com.controller;
 
+import com.ihungre.model.Produto;
 import com.ihungry.model.dao.ProdutoDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -44,6 +46,14 @@ public class AcaoProduto extends HttpServlet {
             ProdutoDAO produto = new ProdutoDAO();
             produto.deletar(id);
             response.sendRedirect("funcionario.jsp?pagina=listarProduto");
+        
+        }else if(acao.equals("alterar")){
+            ProdutoDAO produto = new ProdutoDAO();
+            Produto prod = produto.consultarPorId(id);
+            request.setAttribute("produto", prod);
+            RequestDispatcher rd = request.getRequestDispatcher("funcionario.jsp?pagina=alterarProduto");
+            rd.include(request, response);
+            
         
         }
     }

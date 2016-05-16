@@ -9,10 +9,6 @@ public class Produto {
     
     private int idProduto;
     private String codigo;
-
-    public void setIdProduto(int idProduto) {
-        this.idProduto = idProduto;
-    }
     private String nome;
     private Double preco;
     private String tipo;
@@ -34,6 +30,10 @@ public class Produto {
 
     public void setObservacao(String observacao) {
         this.observacao = observacao;
+    }
+    
+     public void setIdProduto(int idProduto) {
+        this.idProduto = idProduto;
     }
 
     public int getIdProduto() {

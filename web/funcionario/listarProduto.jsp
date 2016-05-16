@@ -46,7 +46,7 @@
             <td class="mdl-data-table__cell--non-numeric"> <% out.print(p.printStatus(p.getStatus())); %></td>
             <td class="mdl-data-table__cell--non-numeric"><a  class="mdl-color--red mdl-button mdl-js-button mdl-button--raised "href="AcaoProduto?acao=excluir&id=<% out.print(p.getIdProduto()); %>">Apagar</a></td>
    
-            <td class="mdl-data-table__cell--non-numeric"><a class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" href="#">Alterar</a></td>
+            <td class="mdl-data-table__cell--non-numeric"><a class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" href="AcaoProduto?acao=alterar&id=<% out.print(p.getIdProduto()); %>">Alterar</a></td>
      </tr>
     
     <%  

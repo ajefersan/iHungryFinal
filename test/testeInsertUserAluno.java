@@ -58,7 +58,9 @@ public class testeInsertUserAluno {
     
     ProdutoDAO prod = new ProdutoDAO();
     
-    prod.deletar(4);
+    Produto produto =  prod.consultarPorId(10);
+    
+    System.out.println(produto.getIdProduto() + " " + produto.getNome());
     
      
    
