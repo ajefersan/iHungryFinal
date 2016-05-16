@@ -106,7 +106,7 @@
           <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">help_outline</i><span class="visuallyhidden">Help</span></a>
         </nav>
       </div>
- <!--     <main class="mdl-layout__content mdl-color--grey-100"> -->
+    <main class="mdl-layout__content mdl-color--grey-100"> 
        
               
               <!-- Conteudo sera  incluido aqui -->
@@ -129,7 +129,7 @@
          <div class="demo-separator mdl-cell--1-col"></div> 
             </div>
         </div>
-     <!--  </main>-->
+       </main>
     </div>
 
     <script src="assets/js/material.min.js"></script>
