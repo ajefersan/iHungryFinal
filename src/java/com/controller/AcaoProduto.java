@@ -41,19 +41,27 @@ public class AcaoProduto extends HttpServlet {
         
         String acao = request.getParameter("acao");
         int id = Integer.parseInt(request.getParameter("id"));
+        ProdutoDAO produto = new ProdutoDAO();
         
         if(acao.equals("excluir")){
-            ProdutoDAO produto = new ProdutoDAO();
+            
             produto.deletar(id);
             response.sendRedirect("funcionario.jsp?pagina=listarProduto");
         
         }else if(acao.equals("alterar")){
-            ProdutoDAO produto = new ProdutoDAO();
+            
             Produto prod = produto.consultarPorId(id);
             request.setAttribute("produto", prod);
             RequestDispatcher rd = request.getRequestDispatcher("funcionario.jsp?pagina=alterarProduto");
             rd.include(request, response);
             
+        
+        }else if(acao.equals("bloquear")){
+           Produto prod = produto.consultarPorId(id);
+           prod.bloquearOuAtt(prod, 2);
+           response.sendRedirect("funcionario.jsp?pagina=listarProduto");
+        
+        
         
         }
     }

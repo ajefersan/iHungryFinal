@@ -24,6 +24,7 @@
       <th>Status</th>
       <th>Apagar</th>
       <th>Alterar</th>
+      <th>Bloq | Desbloq</th>
       
     </tr>
   </thead>
@@ -47,6 +48,7 @@
             <td class="mdl-data-table__cell--non-numeric"><a  class="mdl-color--red mdl-button mdl-js-button mdl-button--raised "href="AcaoProduto?acao=excluir&id=<% out.print(p.getIdProduto()); %>">Apagar</a></td>
    
             <td class="mdl-data-table__cell--non-numeric"><a class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" href="AcaoProduto?acao=alterar&id=<% out.print(p.getIdProduto()); %>">Alterar</a></td>
+             <td class="mdl-data-table__cell--non-numeric"><a class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" href="AcaoProduto?acao=bloquear&id=<% out.print(p.getIdProduto()); %>">Bloq|Dsblq</a></td>
      </tr>
     
     <%  

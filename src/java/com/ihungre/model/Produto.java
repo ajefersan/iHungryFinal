@@ -88,8 +88,16 @@ public class Produto {
         */
         
           boolean resposta = true;
-          if(operacao == 1)
-                 this.status = 0;
+          if(operacao == 1){
+              
+              if(this.status == 0)
+                  this.status = 1;
+              else if(this.status == 1)
+                  this.status = 0;
+          
+          
+          }
+                 
          try {
               ProdutoDAO prod = new ProdutoDAO();
               
