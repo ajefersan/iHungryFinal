@@ -13,7 +13,7 @@
 <div class="demo-graphs mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--8-col">
  <div class="mdl-card__supporting-text">
 <form name="form"action="http://localhost:8083/iHungry/servletBloquearConsumo" >
-    <h4 align="center">Bloquear produto </h4>
+    <h4 align="center">Bloquear </h4>
     
  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
      
@@ -23,7 +23,7 @@
  </div>
 
  <div class="input-field">
-		<select name="id">
+		<select name="nome">
                     <optgroup>
                             <option value="" disabled selected>Nome do Produto</option>
                       
@@ -44,12 +44,6 @@
                     
                 </select>
  </div>
-<br>
-
-
-<button  type="submit"class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
-                 Bloquear
- </button>
 
 
 </form>
