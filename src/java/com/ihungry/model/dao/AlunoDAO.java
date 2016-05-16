@@ -176,6 +176,32 @@ public class AlunoDAO extends UsuarioDAO{
         return saldo;
     }
     
+    
+    public Aluno consularPorMatricula(String matricula){
+        
+        String qr = "SELECT usuario.nome, aluno.saldo FROM usuario INNER JOIN aluno on IdUsuario = idUsuario_FK WHERE aluno.matricula = '" + matricula + " '" ;
+        Aluno aluno = new Aluno();
+          try (PreparedStatement stmt = this.query(qr)) 
+        {
+           // stmt.setInt(1,id);
+           
+            ResultSet rs = stmt.executeQuery();
+            rs.next();
+            
+           aluno.setNome(rs.getString("usuario.nome"));
+           aluno.setMatricula(matricula);
+           aluno.setSaldo(rs.getDouble("saldo"));
+             
+            
+           
+        }catch(Exception e ){
+            System.out.println(e.getMessage());
+        }
+    
+    return aluno;
+    
+    }
+    
     public void atualizar(Aluno item,String cpf) throws SQLException 
     {   //adicionar idEscola_Fk qdo criar a tabela
         String qr = "UPDATE aluno SET matricula=?, turma=? , turno=? , saldo=? , idUsuario_FK=?, idResponsavel_FK = ?  WHERE matricula = '" + item.getMatricula()+"'";
