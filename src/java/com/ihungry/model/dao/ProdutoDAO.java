@@ -79,17 +79,17 @@ public class ProdutoDAO extends ConnectionFactory{
     public boolean atualizar(Produto item) throws SQLException 
     {   
         boolean resposta = true;
-        String qr = "UPDATE produto SET codigo=?, nome=?, tipo=? , preco=? , observacao=? , quantidade=?,status=? WHERE idProduto=?";
+        String qr = "UPDATE produto SET codigo=?, nome=?,preco=? , observacao=? , quantidade=?,status=? WHERE idProduto=?";
         try(PreparedStatement stmt = this.query(qr)) 
         {
             stmt.setString(1, item.getCodigo());
             stmt.setString(2, item.getNome());
-            stmt.setString(3, item.getTipo());
-            stmt.setDouble(4, item.getPreco());
-            stmt.setString(5, item.getObservacao());
-            stmt.setInt(6, item.getQuantidade());
-            stmt.setInt(7, item.getStatus());
-            stmt.setInt(8, this.pegaId(item.getCodigo()));
+         //   stmt.setString(3, item.getTipo());
+            stmt.setDouble(3, item.getPreco());
+            stmt.setString(4, item.getObservacao());
+            stmt.setInt(5, item.getQuantidade());
+            stmt.setInt(6, item.getStatus());
+            stmt.setInt(7, this.pegaId(item.getCodigo()));
            
                         
             stmt.execute();

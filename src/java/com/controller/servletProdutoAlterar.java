@@ -9,6 +9,7 @@ import com.ihungre.model.Produto;
 import com.ihungry.model.dao.ProdutoDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -42,7 +43,6 @@ public class servletProdutoAlterar extends HttpServlet {
         
         produto.setCodigo(request.getParameter("codigo"));
         produto.setNome(request.getParameter("nome"));
-        produto.setTipo(request.getParameter("tipo"));
         produto.setObservacao(request.getParameter("observacao"));
         produto.setPreco(Double.parseDouble(request.getParameter("preco")));
         produto.setQuantidade(Integer.parseInt(request.getParameter("quantidade")));
@@ -55,15 +55,14 @@ public class servletProdutoAlterar extends HttpServlet {
     
         try{
           if(resposta =  prod.atualizar(produto)){
-             RequestDispatcher rd = request.getRequestDispatcher("cadastrador.jsp");
+             RequestDispatcher rd = request.getRequestDispatcher("funcionario.jsp?pagina=listarProduto");
              rd.include(request, response);
         
           }
         
-        }catch(Exception e){
+        }catch(SQLException | ServletException | IOException e){
             
-             RequestDispatcher rd = request.getRequestDispatcher("erro.jsp");
-             rd.include(request, response);
+             System.out.println(e.getMessage());
         }
     }
 
