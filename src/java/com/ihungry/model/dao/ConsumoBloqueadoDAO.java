@@ -11,16 +11,16 @@ public class ConsumoBloqueadoDAO extends ConnectionFactory{
     
     public void cadastrar(ConsumoBloqueado consumo) throws SQLException
     {   
-        String qr = "INSERT INTO consumo_bloqueado (cod,idAluno_FK,idProduto_FK) VALUES (?,?,?)";
+        String qr = "INSERT INTO consumo_bloqueado (idAluno_FK,idProduto_FK) VALUES (?,?,?)";
                                                                         
         
         try(PreparedStatement stmt = this.query(qr))
             
         {
             
-            stmt.setString(1,consumo.getCod());
-            stmt.setInt(2, consumo.getIdAluno());
-            stmt.setInt(3,consumo.getIdProduto());
+           
+            stmt.setInt(1, consumo.getIdAluno());
+            stmt.setInt(2,consumo.getIdProduto());
            
             stmt.execute();
             stmt.close(); 

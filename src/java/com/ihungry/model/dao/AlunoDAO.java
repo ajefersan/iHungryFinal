@@ -205,6 +205,7 @@ public class AlunoDAO extends UsuarioDAO{
            aluno.setNome(rs.getString("usuario.nome"));
            aluno.setMatricula(matricula);
            aluno.setSaldo(rs.getDouble("saldo"));
+           aluno.setIdAluno(rs.getInt("idAluno"));
              
             
            
