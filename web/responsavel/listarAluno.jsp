@@ -22,7 +22,11 @@
       <th class="mdl-data-table__cell--non-numeric">Matricula</th>
       <th class="mdl-data-table__cell--non-numeric">Turma</th>
       <th class="mdl-data-table__cell--non-numeric">Turno</th>
-      <th>Saldo</th>
+       <th>Saldo</th>
+      <th class="mdl-data-table__cell--non-numeric">Apagar</th>
+      <th class="mdl-data-table__cell--non-numeric">Alterar</th>
+      
+     
      
     </tr>
   </thead>
@@ -41,6 +45,7 @@
             <td class="mdl-data-table__cell--non-numeric"> <% out.print(a.getMatricula());  %></td>
             <td class="mdl-data-table__cell--non-numeric"> <%  out.print(a.getTurma());  %> </td>
             <td class="mdl-data-table__cell--non-numeric"> <%  out.print(a.getTurno());  %> </td>
+            <td>R$ <% out.print(a.getSaldo()); %></td>
             <td class="mdl-data-table__cell--non-numeric"><a  class="mdl-color--red mdl-button mdl-js-button mdl-button--raised "href="AcaoAluno?acao=excluir&id=<% out.print(a.getIdAluno()); %>">Apagar</a></td>
             <td class="mdl-data-table__cell--non-numeric"><a class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" href="AcaoProduto?acao=alterar&id=<% out.print(a.getIdAluno()); %>">Alterar</a></td>
      </tr>

@@ -105,8 +105,7 @@
         </nav>
       </div>
       <main class="mdl-layout__content mdl-color--grey-100">
-        <div class="mdl-grid demo-content">
-            <div class="demo-graphs mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--8-col">
+       
               
               <!-- Conteudo sera  incluido aqui -->
 
@@ -124,37 +123,13 @@
 
             </div>
             <div class="demo-cards mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
-              <div class="demo-updates mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--12-col-desktop">
-                  <div class="mdl-card__title mdl-card--expand mdl-color--teal-300">
-                    <h2 class="mdl-card__title-text">Updates</h2>
-                  </div>
-                  <div class="mdl-card__supporting-text mdl-color-text--grey-600">
-                    Non dolore elit adipisicing ea reprehenderit consectetur culpa.
-                  </div>
-                  <div class="mdl-card__actions mdl-card--border">
-                    <a href="#" class="mdl-button mdl-js-button mdl-js-ripple-effect">Read More</a>
-                  </div>
-              </div>
+          
               <div class="demo-separator mdl-cell--1-col"></div>
             </div>
         </div>
       </main>
     </div>
-     <!-- <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" style="position: fixed; left: -1000px; height: -1000px;">
-        <defs>
-          <mask id="piemask" maskContentUnits="objectBoundingBox">
-            <circle cx=0.5 cy=0.5 r=0.49 fill="white">
-            <circle cx=0.5 cy=0.5 r=0.40 fill="black">
-          </mask>
-          <g id="piechart">
-            <circle cx=0.5 cy=0.5 r=0.5>
-            <path d="M 0.5 0.5 0.5 0 A 0.5 0.5 0 0 1 0.95 0.28 z" stroke="none" fill="rgba(255, 255, 255, 0.75)">
-          </g>
-        </defs>
-      </svg> -->
-    <!--  <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 500 250" style="position: fixed; left: -1000px; height: -1000px;">
-       
-      </svg>-->
+
     <script src="assets/js/material.min.js"></script>
   </body>
 </html>

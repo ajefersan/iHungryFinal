@@ -65,7 +65,7 @@ public class AlunoDAO extends UsuarioDAO{
         {
             Aluno item = new Aluno();
             
-            item.setNome(resultset.getString("nome"));
+            item.setNome(resultset.getString("usuario.nome"));
             item.setMatricula(resultset.getString("matricula"));
             item.setTurma(resultset.getString("turma"));
             item.setTurno(resultset.getString("turno"));
@@ -85,7 +85,7 @@ public class AlunoDAO extends UsuarioDAO{
     public ArrayList<Aluno> consultar() throws SQLException 
     {
         ArrayList<Aluno> lista;
-        String qr = "SELECT * FROM aluno";
+        String qr = "SELECT usuario.nome, aluno.* FROM usuario INNER JOIN aluno on IdUsuario = idUsuario_FK";
         
         try (PreparedStatement stmt = this.query(qr)) 
         {   
