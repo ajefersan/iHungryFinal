@@ -50,8 +50,9 @@ public class ProdutoDAO extends ConnectionFactory{
             item.setPreco(resultset.getDouble("preco"));
             item.setQuantidade(resultset.getInt("quantidade"));
             item.setStatus(resultset.getInt("status"));
-            item.setPreco(resultset.getDouble("tipo"));
-            item.setQuantidade(resultset.getInt("observacao"));
+            item.setTipo(resultset.getString("tipo"));
+            item.setObservacao(resultset.getString("observacao"));
+            item.setIdProduto(resultset.getInt("idProduto"));
             
             
            lista.add(item);
@@ -78,17 +79,17 @@ public class ProdutoDAO extends ConnectionFactory{
     public boolean atualizar(Produto item) throws SQLException 
     {   
         boolean resposta = true;
-        String qr = "UPDATE produto SET codigo=?, nome=?, tipo=? , preco=? , observacao=? , quantidade=?,status=? WHERE idProduto=?";
+        String qr = "UPDATE produto SET codigo=?, nome=?,preco=? , observacao=? , quantidade=?,status=? WHERE idProduto=?";
         try(PreparedStatement stmt = this.query(qr)) 
         {
             stmt.setString(1, item.getCodigo());
             stmt.setString(2, item.getNome());
-            stmt.setString(3, item.getTipo());
-            stmt.setDouble(4, item.getPreco());
-            stmt.setString(5, item.getObservacao());
-            stmt.setInt(6, item.getQuantidade());
-            stmt.setInt(7, item.getStatus());
-            stmt.setInt(8, this.pegaId(item.getCodigo()));
+         //   stmt.setString(3, item.getTipo());
+            stmt.setDouble(3, item.getPreco());
+            stmt.setString(4, item.getObservacao());
+            stmt.setInt(5, item.getQuantidade());
+            stmt.setInt(6, item.getStatus());
+            stmt.setInt(7, this.pegaId(item.getCodigo()));
            
                         
             stmt.execute();
@@ -100,14 +101,15 @@ public class ProdutoDAO extends ConnectionFactory{
         return resposta;
     }
 
-    public boolean deletar(Produto item) throws SQLException 
+    public boolean deletar(int id) throws SQLException 
     {   boolean resposta = true;
         String qr = "DELETE FROM produto WHERE idProduto=?";
         try(PreparedStatement stmt = this.query(qr)) 
         {
-            stmt.setInt(1, item.getIdProduto());
+            stmt.setInt(1, id);
             stmt.execute();
             stmt.close();
+            
         }catch(Exception e ){
             System.out.println(e.getMessage());
             resposta = false;
@@ -137,10 +139,35 @@ public class ProdutoDAO extends ConnectionFactory{
         }
           
           return id;
-    
-    
-    
     }
      
+    public Produto consultarPorId(int id){
+        String qr = "SELECT * FROM produto where idProduto = '"+ id + "'";
+        Produto p = new Produto();
+          try (PreparedStatement stmt = this.query(qr)) 
+        {
+           // stmt.setInt(1,id);
+           
+            ResultSet rs = stmt.executeQuery();
+             rs.next();
+             p.setIdProduto(rs.getInt("idProduto")) ;
+             p.setCodigo(rs.getString("codigo"))  ;
+             p.setNome( rs.getString("nome"));
+             p.setObservacao(rs.getString("observacao"));
+             p.setPreco(rs.getDouble("preco"));
+             p.setQuantidade(rs.getInt("quantidade"))  ;
+             p.setStatus(rs.getInt("status"));
+             p.setTipo(rs.getString("tipo"));
+             
+            
+           
+        }catch(Exception e ){
+            System.out.println(e.getMessage() + "Entrei nesse");
+        }
+    
+    
+    return p;
+    
+    }
      
 }

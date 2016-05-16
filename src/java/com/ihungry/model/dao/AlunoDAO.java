@@ -15,7 +15,7 @@ public class AlunoDAO extends UsuarioDAO{
         
         int idReturn = 0;
         String qrUs = "INSERT INTO usuario(login,senha,nome,tipoUsuario) VALUES (?,?,?,?)";  
-        String qrAl = "INSERT INTO aluno (matricula,turma,turno,saldo,idUsuario_FK,idResponsavel_FK) VALUES (?,?,?,?,?,?)";
+        String qrAl = "INSERT INTO aluno (matricula,turma,turno,saldo,idUsuario_FK,idResponsavel_FK,idEscola_FK) VALUES (?,?,?,?,?,?,?)";
         int idResp = this.pegarIdResponsavel(cpf);                                                           
             
         try(PreparedStatement stmt = this.query(qrUs , Statement.RETURN_GENERATED_KEYS))
@@ -26,11 +26,11 @@ public class AlunoDAO extends UsuarioDAO{
             stmt.setString(4, aluno.getTipoUsuario());
             stmt.execute();
             ResultSet rs = stmt.getGeneratedKeys();  
-            if (rs.next())
-                idReturn = rs.getInt(1);
-
             
+            if (rs.next())
+                idReturn = rs.getInt(1);   
         }
+        
         System.out.println("ok user");
         
         if(idReturn == 0)
@@ -39,16 +39,14 @@ public class AlunoDAO extends UsuarioDAO{
         try(PreparedStatement stmt = this.query(qrAl))    
         {
 
-           
             stmt.setString(1, aluno.getMatricula());
             stmt.setString(2, aluno.getTurma());
             stmt.setString(3, aluno.getTurno());
             stmt.setDouble(4, aluno.getSaldo());
             stmt.setInt(5, idReturn);
             stmt.setInt(6, idResp);
-            
-         //   stmt.setString(7, Integer.toString(aluno.getIdEscola()));
-           
+            stmt.setInt(7, aluno.getIdEscola());
+          
             stmt.execute();
             stmt.close(); 
             System.out.println("ok aluno!");
@@ -59,7 +57,7 @@ public class AlunoDAO extends UsuarioDAO{
     }   
      
      
-    private ArrayList<Aluno> listar(ResultSet resultset) throws SQLException
+    public ArrayList<Aluno> listar(ResultSet resultset) throws SQLException
     {
         ArrayList<Aluno> lista = new ArrayList<>();
         
@@ -67,14 +65,15 @@ public class AlunoDAO extends UsuarioDAO{
         {
             Aluno item = new Aluno();
             
-            item.setNome(resultset.getString("nome"));
+            item.setNome(resultset.getString("usuario.nome"));
             item.setMatricula(resultset.getString("matricula"));
             item.setTurma(resultset.getString("turma"));
             item.setTurno(resultset.getString("turno"));
             item.setSaldo(resultset.getDouble("saldo"));
             item.setIdUsuario(resultset.getInt("idUsuario_FK"));
-           // item.setIdResponsavel(resultset.getInt("idResponsavel_FK"));
-           // item.setIdEscola(resultset.getInt("idEscola_FK"));
+            item.setIdResponsavel(resultset.getInt("idResponsavel_FK"));
+            item.setIdEscola(resultset.getInt("idEscola_FK"));
+            item.setIdAluno(resultset.getInt("idAluno"));
             
             
             lista.add(item);
@@ -87,7 +86,7 @@ public class AlunoDAO extends UsuarioDAO{
     public ArrayList<Aluno> consultar() throws SQLException 
     {
         ArrayList<Aluno> lista;
-        String qr = "SELECT * FROM aluno";
+        String qr = "SELECT usuario.nome, aluno.* FROM usuario INNER JOIN aluno on IdUsuario = idUsuario_FK";
         
         try (PreparedStatement stmt = this.query(qr)) 
         {   
@@ -101,17 +100,30 @@ public class AlunoDAO extends UsuarioDAO{
     
     
     
-    public void consultarPorId(Integer item) throws SQLException 
+    public Aluno  consultarPorId(int id) throws SQLException 
     {
-        String qr = "SELECT * FROM aluno WHERE idAluno = ?";
-        boolean id = false;
+        String qr = "SELECT usuario.nome,usuario.login, usuario.senha,usuario.idUsuario,aluno.* FROM usuario INNER JOIN aluno on IdUsuario = idUsuario_FK WHERE idAluno = " + id;
+        Aluno a = new Aluno();
         
         try(PreparedStatement stmt = this.query(qr))
         {   
-            stmt.setInt(1, item);
+ 
             ResultSet rs = stmt.executeQuery();
+            rs.next();
+            a.setNome(rs.getString("usuario.nome"));
+            a.setLogin(rs.getString("usuario.login"));
+            a.setSenha(rs.getString("usuario.senha"));
+            a.setIdUsuario(rs.getInt("usuario.idUsuario"));
+            a.setMatricula(rs.getString("matricula"));
+            a.setTurma(rs.getString("turma"));
+            a.setTurno(rs.getString("turno"));
+            a.setSaldo(rs.getDouble("saldo"));
             
+        }catch(Exception e ){
+            System.out.println(e.getMessage() + "Entrei consultaId aluno");
         }
+        
+        return a ;
         
     }
     
@@ -126,17 +138,14 @@ public class AlunoDAO extends UsuarioDAO{
             ResultSet rs = stmt.executeQuery();
             rs.next();
              id = rs.getInt("idResponsavel");
-             System.out.println(id + "imprimi isso");
+             System.out.println("Deu certo ID :" +id);
            
         }catch(Exception e ){
-            System.out.println(e.getMessage() + "Entrei nesse");
+            System.out.println(e.getMessage() + "Deu Merda");
         }
           
           return id;
-         
-     
-     
-     }
+    }
       
        public int pegarIdUsuario(String matricula )throws SQLException {
          int id = 0;
@@ -181,37 +190,81 @@ public class AlunoDAO extends UsuarioDAO{
         return saldo;
     }
     
-    public void atualizar(Aluno item,String cpf) throws SQLException 
-    {   //adicionar idEscola_Fk qdo criar a tabela
-        String qr = "UPDATE aluno SET matricula=?, turma=? , turno=? , saldo=? , idUsuario_FK=?, idResponsavel_FK = ?  WHERE matricula = '" + item.getMatricula()+"'";
+    
+    public Aluno consularPorMatricula(String matricula){
+        
+        String qr = "SELECT usuario.nome, aluno.saldo FROM usuario INNER JOIN aluno on IdUsuario = idUsuario_FK WHERE aluno.matricula = '" + matricula + " '" ;
+        Aluno aluno = new Aluno();
+          try (PreparedStatement stmt = this.query(qr)) 
+        {
+           // stmt.setInt(1,id);
+           
+            ResultSet rs = stmt.executeQuery();
+            rs.next();
+            
+           aluno.setNome(rs.getString("usuario.nome"));
+           aluno.setMatricula(matricula);
+           aluno.setSaldo(rs.getDouble("saldo"));
+           aluno.setIdAluno(rs.getInt("idAluno"));
+             
+            
+           
+        }catch(Exception e ){
+            System.out.println(e.getMessage());
+        }
+    
+    return aluno;
+    
+    }
+    
+    public boolean atualizar(Aluno item) throws SQLException 
+    {   
+        boolean resposta = true;
+        String qr = "UPDATE usuario SET nome = ? , login = ?, senha = ? WHERE idUsuario = ? ";
+        
         try(PreparedStatement stmt = this.query(qr)) 
+        {
+            
+            stmt.setString(1, item.getNome());
+            stmt.setString(2, item.getLogin());
+            stmt.setString(3, item.getSenha());
+            stmt.setInt(4, this.pegarIdUsuario(item.getMatricula()));
+            stmt.execute();
+            stmt.close();
+        }catch(Exception e){
+            System.out.println(e.getMessage()+ " ALUNO DAO atualizar ");
+            resposta = false;
+        }
+        String qr2 = "UPDATE aluno SET matricula=?, turma=? , turno=?  WHERE idAluno = ? " ;
+        try(PreparedStatement stmt = this.query(qr2)) 
         {
             //aluno nao tem nome
             stmt.setString(1, item.getMatricula());
             stmt.setString(2, item.getTurma());
             stmt.setString(3, item.getTurno());
-            stmt.setDouble(4, item.getSaldo());
-            stmt.setInt(5, this.pegarIdUsuario(item.getMatricula()));
-            stmt.setInt(6, this.pegarIdResponsavel(cpf));
-           // stmt.setInt(8, item.getIdEscola());
-           
-            
+            stmt.setInt(4, this.pegarIdAluno(item.getMatricula()));
             stmt.execute();
             stmt.close();
         }catch(Exception e){
         
-            System.out.println(e.getMessage()+ " ALUNO DAO");
+            System.out.println(e.getMessage()+ " ALUNO DAO atualizar ");
+            resposta = false;
         }
+        
+        return resposta ;
     }
 
-    public void deletar(Aluno item) throws SQLException 
+    public void deletar(int id) throws SQLException 
     {   
-        String qr = "DELETE FROM aluno WHERE id=?";
+        String qr = "DELETE FROM aluno WHERE idAluno=?";
         try(PreparedStatement stmt = this.query(qr)) 
         {
-            stmt.setInt(1, item.getIdUsuario());
+            stmt.setInt(1, id);
             stmt.execute();
             stmt.close();
+        }catch(Exception e ){
+            System.out.println(e.getMessage());
+        
         }
     }
     
@@ -237,8 +290,53 @@ public class AlunoDAO extends UsuarioDAO{
        return (lista.size() > 0) ? lista.get(0) : null;
     }
     
-   
+    public int pegarIdAluno(String codigo)throws SQLException {
+         int id = 0;
+         String qr = "SELECT idAluno FROM aluno WHERE matricula = '"+codigo+"'";
+         
+          try (PreparedStatement stmt = this.query(qr)) 
+        {
+           // stmt.setInt(1,id);
+           
+            ResultSet rs = stmt.executeQuery();
+            rs.next();
+            id = rs.getInt("idAluno");
+                      
+        }catch(Exception e ){
+            System.out.println(e.getMessage() + "Deu Merda");
+        }
+          
+          return id;
+    }
+    
+    public boolean creditar(double saldo, Aluno a ){
+         boolean resposta = true;
+        
+        String qr = "UPDATE aluno SET saldo = ?  WHERE matricula = ? ";
+        
+        try(PreparedStatement stmt = this.query(qr)) 
+        {
+            stmt.setDouble(1,a.getSaldo() + saldo);
+            stmt.setString(2,a.getMatricula());
+            stmt.execute();
+            stmt.close();
+            
+        }catch(Exception e){
+            System.out.println(e.getMessage() + " entrei creditar alunoDAO");
+            resposta = false;
+        
+        }
+
+    return resposta;
+    }
+    
+    
+
+
+
+
+   }
     
      
-}
+
 

@@ -31,6 +31,10 @@ public class Produto {
     public void setObservacao(String observacao) {
         this.observacao = observacao;
     }
+    
+     public void setIdProduto(int idProduto) {
+        this.idProduto = idProduto;
+    }
 
     public int getIdProduto() {
         return idProduto;
@@ -78,14 +82,20 @@ public class Produto {
     
     
     
-    public boolean bloquearOuAtt(Produto produto,int operacao){
-        /* Operacao 1 = atualizar
-           Operacao 2 = bloquear
-        */
+    public boolean bloquear(Produto produto){
+        
         
           boolean resposta = true;
-          if(operacao == 1)
-                 this.status = 0;
+          
+              
+            if(status == 0)
+                 status = 1;
+              else if(status == 1)
+                 status = 0;
+          
+          
+          
+                 
          try {
               ProdutoDAO prod = new ProdutoDAO();
               
@@ -101,23 +111,17 @@ public class Produto {
     
     }
     
-     public boolean deletarProduto(Produto produto){
-
-         boolean resposta = true;
-         try {
-              ProdutoDAO prod = new ProdutoDAO();
-              this.status = 0;
-              resposta = prod.deletar(produto);
-              
-            
-         } catch (Exception e) {
-             System.out.println(e.getMessage());
-         }
-       
-        return resposta;
-    
+    public String printStatus(int status){
+        
+        String mensagem = null;
+        if(status == 1) mensagem = "DISPONIVEL";
+        else if(status == 0) mensagem = "BLOQUEADO";
+        
+        return mensagem;
     
     }
+    
+    
      
      public ArrayList<Produto> listarProduto(ResultSet resultset) throws SQLException
     {

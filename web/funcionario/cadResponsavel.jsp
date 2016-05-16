@@ -1,82 +1,57 @@
-<%-- 
-    Document   : cadResponsavel.jsp
-    Created on : 04/05/2016, 21:21:45
-    Author     : jeferson
---%>
+ <div class="mdl-grid demo-content">
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link type="text/css" rel="stylesheet" href="../assets/css/materialize.min.css"  media="screen,projection"/>
-         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <title>Cadastro de Responsavel</title>
-    </head>
-    <body>
-      <div class="container row">
-		<div class="col s12 offset-s2">
-			<form name="form" action="http://localhost:8083/iHungry/servletResponsavelAdd" method="post"onsubmit="return validar();" class="col s8">
-				<div class="row">
+<div class="demo-graphs mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--8-col">
 
-					
+<form action="http://localhost:8083/iHungry/servletResponsavelAdd" name="form" >
+                  <div class="mdl-card__supporting-text">
+                     <h4 align="center">Cadastro de Responsavel </h4>
+                   
+                  </div>
 
-						<div class="input-field col s12">
-							<h4>Cadastro de Responsavel</h4>	
-						</div>
-						<div class="input-field col s12">
-							<input class="validate" type="text" placeholder="Nome do Responsavel" name="nome"></input>
-							
-						</div>
-						
-						
-						<div class="input-field col s2">
-							
-						</div>							
-						
-						<div class="input-field col s12">
-							<input class="validate" type="text" name="cpf" placeholder="CPF"></input>
-							
-						</div>	
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                      <input class="mdl-textfield__input" name="nome" type="text" id="sample3">
+                      <label class="mdl-textfield__label" for="sample3">Nome...</label>
+                  </div>
 
-						<div class="input-field col s12">					
-							<input class="validate" type="text" name="telefone" placeholder="Telefone"></input>	
-
-						</div>
-
-						<div class="input-field col s12">
-							<input class="validate" type="email" name="email" placeholder="Email"></input>
-							
-						</div>
-
-						<div class="input-field col s12">
-							<input class="validate" type="text" name="login" placeholder="Login"></input>
-							
-						</div>
-
-						<div class="input-field col s12">
-							<input class="validate" type="text" name="senha" placeholder="Senha"></input>
-							
-						</div>
-						
-						<div class="col s12">
-							<button class="btn red darken1" type="submit" name="action">Enviar
-							</button>
-							<button class="btn red darken1" type="submit" name="action">Consultar
-						   		
-							</button>
+                   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                      <input class="mdl-textfield__input" type="text" name="cpf" pattern="-?[0-9]*(\.[0-9]+)?" id="sample2">
+                      <label class="mdl-textfield__label" for="sample2">Cpf...</label>
+                      <span class="mdl-textfield__error">Apenas numeros neste campo!</span>
+                  </div>
 
 
-						</div>
-						
-		        
-					
-			</form>	
-		</div>	
-	</div>
+                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                      <input class="mdl-textfield__input" name="email" type="email" id="sample3">
+                      <label class="mdl-textfield__label" for="sample3">Email...</label>
+                </div>
 
-<!--Import jQuery before materialize.js-->
-      <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-      <script type="text/javascript" src="../assets/js/materialize.min.js"></script>
-    </body>
-</html>
+
+                   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                      <input class="mdl-textfield__input" type="text" name="telefone" pattern="-?[0-9]*(\.[0-9]+)?" id="sample5">
+                      <label class="mdl-textfield__label" for="sample5">Telefone...</label>
+                      <span class="mdl-textfield__error">Apenas numeros neste campo!</span>
+                  </div>
+
+                 
+
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                      <input class="mdl-textfield__input" name="login" type="text" id="sample3">
+                      <label class="mdl-textfield__label" for="sample3">Login...</label>
+                </div>
+
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                      <input class="mdl-textfield__input" name="senha" type="password" id="sample3">
+                      <label class="mdl-textfield__label" for="sample3">Senha...</label>
+                </div>
+
+  
+            
+                <button  type="submit"class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+                  Cadastrar
+                </button>
+                
+              </form>
+  </div>
+     
+     
+ </div>

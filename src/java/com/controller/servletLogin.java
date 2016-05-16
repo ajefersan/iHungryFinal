@@ -5,10 +5,15 @@
  */
 package com.controller;
 
+import com.ihungre.model.Responsavel;
 import com.ihungre.model.Usuario;
+import com.ihungry.model.dao.ResponsavelDAO;
 import com.ihungry.model.dao.UsuarioDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -33,23 +38,23 @@ public class servletLogin extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         
         String login = request.getParameter("login");
         String senha = request.getParameter("senha");
         
-        UsuarioDAO user = new UsuarioDAO();
-        Usuario usuario = new Usuario();
+        ResponsavelDAO respons = new ResponsavelDAO();
+        Usuario responsavel = respons.login(login, senha);
         
-         usuario = user.logar(login, senha);
+       
          
-         if(usuario != null){
-             if("ALUNO".equals(usuario.getTipoUsuario())){
+         if(responsavel != null){
+             if("ALUNO".equals(responsavel.getTipoUsuario())){
                     RequestDispatcher rd = request.getRequestDispatcher("responsavel/logado.jsp");
                     rd.include(request, response);
          
-            }else if("RESPONSAVEL".equals(usuario.getTipoUsuario())){
+            }else if("RESPONSAVEL".equals(responsavel.getTipoUsuario())){
                 RequestDispatcher rd = request.getRequestDispatcher("cadastrador.jsp");
                 rd.include(request, response);
          
@@ -81,7 +86,11 @@ public class servletLogin extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(servletLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -95,7 +104,11 @@ public class servletLogin extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(servletLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

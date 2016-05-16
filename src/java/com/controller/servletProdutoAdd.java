@@ -6,8 +6,9 @@
 package com.controller;
 
 import com.ihungre.model.Produto;
+import com.ihungry.model.dao.ProdutoDAO;
 import java.io.IOException;
-import static java.lang.System.out;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,7 +36,9 @@ public class servletProdutoAdd extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         Produto produto = new Produto();
+        ProdutoDAO prod = new ProdutoDAO();
         boolean resposta = true;
+        
         
         produto.setCodigo(request.getParameter("codigo"));
         produto.setNome(request.getParameter("nome"));
@@ -44,8 +47,14 @@ public class servletProdutoAdd extends HttpServlet {
         produto.setPreco(Double.parseDouble(request.getParameter("preco")));
         produto.setQuantidade(Integer.parseInt(request.getParameter("quantidade")));
         produto.setStatus(1);
+       
+        
+        request.setAttribute("produto", produto);
+
+    
+    
         try{
-          if(resposta =  produto.cadastrar(produto)){
+          if(resposta =  prod.cadastrar(produto)){
              RequestDispatcher rd = request.getRequestDispatcher("cadastrador.jsp");
              rd.include(request, response);
         

@@ -85,4 +85,50 @@ public class EscolaDAO extends ConnectionFactory {
             stmt.close();
         }
     }
+    
+    public int pegarIdEscola(String nome)throws SQLException {
+         int id = 0;
+         String qr = "SELECT idEscola from escola where nome = '"+nome+"'";
+         
+          try (PreparedStatement stmt = this.query(qr)) 
+        {
+           
+           
+            ResultSet rs = stmt.executeQuery();
+            rs.next();
+             id = rs.getInt("idEscola");
+             System.out.println(id + "imprimi isso");
+           
+        }catch(Exception e ){
+            System.out.println(e.getMessage() + "Entrei nesse");
+        }
+          
+          return id;
+         
+     
+     
+     }
+      
+       public int pegarIdUsuario(String matricula )throws SQLException {
+         int id = 0;
+         String qr = "SELECT idUsuario_FK from aluno where matricula = '"+matricula+"'";
+         
+          try (PreparedStatement stmt = this.query(qr)) 
+        {
+           // stmt.setInt(1,id);
+           
+            ResultSet rs = stmt.executeQuery();
+            rs.next();
+             id = rs.getInt("idUsuario_FK");
+             System.out.println(id + "imprimi id usuario");
+           
+        }catch(Exception e ){
+            System.out.println(e.getMessage() + "Entrei idFK nesse");
+        }
+          
+          return id;
+         
+     
+     
+     }
 }
