@@ -8,10 +8,10 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.ihungry.model.dao.ProdutoDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<div class="mdl-grid mdl-card__supporting-text">
+
     
     
-<table class="mdl-data-table mdl-js-data-table  mdl-cell ">
+<table class="mdl-data-table mdl-js-data-table  mdl-cell mdl-card__supporting-text ">
     <caption><h4>Produtos cadastrados </h4></caption>
  
   <thead>
@@ -48,8 +48,10 @@
             <td class="mdl-data-table__cell--non-numeric"><a  class="mdl-color--red mdl-button mdl-js-button mdl-button--raised "href="AcaoProduto?acao=excluir&id=<% out.print(p.getIdProduto()); %>">Apagar</a></td>
    
             <td class="mdl-data-table__cell--non-numeric"><a class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" href="AcaoProduto?acao=alterar&id=<% out.print(p.getIdProduto()); %>">Alterar</a></td>
-             <td class="mdl-data-table__cell--non-numeric"><a class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" href="AcaoProduto?acao=bloquear&id=<% out.print(p.getIdProduto()); %>">Bloq|Dsblq</a></td>
+             <td class="mdl-data-table__cell--non-numeric"><a class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" href="AcaoProduto?acao=bloquear&id=<% out.print(p.getIdProduto()); %>">Bloq|Dsblq</a><br><br></td>
      </tr>
+     
+     <br>
     
     <%  
             }
@@ -59,4 +61,3 @@
   
 </table>
      
-</div>
