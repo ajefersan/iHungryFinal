@@ -52,7 +52,7 @@
         </div>
         <div class="input-field">
 		<select name="turno"  >
-                    <optgroup
+                    <optgroup>
 				<option value="" disabled selected>Escolha o Turno</option>
 				<option value="matutino">Matutino</option>
 				<option value="noturno">Vespertino</option>
