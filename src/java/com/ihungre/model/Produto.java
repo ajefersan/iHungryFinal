@@ -83,8 +83,8 @@ public class Produto {
            Operacao 2 = bloquear
         */
         
-          boolean resposta = true;
-          if(operacao == 1)
+         boolean resposta = true;
+         if(operacao == 1)
                  this.status = 0;
          try {
               ProdutoDAO prod = new ProdutoDAO();
@@ -119,6 +119,23 @@ public class Produto {
     
     }
      
+    public boolean cadastrarProduto(Produto produto){
+
+         boolean retorno = true;
+         try {
+             
+              ProdutoDAO prod = new ProdutoDAO();
+              this.status = 0;
+              retorno = prod.cadastrar(produto);
+
+         } catch (Exception e) {
+             System.out.println(e.getMessage());
+         }
+       
+        return retorno;
+    
+    
+    } 
      public ArrayList<Produto> listarProduto(ResultSet resultset) throws SQLException
     {
         ArrayList<Produto> lista = new ArrayList<>();
