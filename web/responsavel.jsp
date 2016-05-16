@@ -97,6 +97,7 @@
           <a class="mdl-navigation__link" href="?pagina=cadAluno"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Cadastrar</a>
           <a class="mdl-navigation__link" href="?pagina=listarAluno"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">inbox</i>Listar</a>
           <a class="mdl-navigation__link" href="?pagina=creditarAluno"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">inbox</i>Creditar</a>
+           <a class="mdl-navigation__link" href="?pagina=bloquearConsumo"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">inbox</i>Bloquear</a>
 
           
           
