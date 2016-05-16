@@ -308,6 +308,34 @@ public class AlunoDAO extends UsuarioDAO{
           return id;
     }
     
+    public boolean creditar(double saldo, Aluno a ){
+         boolean resposta = true;
+        
+        String qr = "UPDATE aluno SET saldo = ?  WHERE matricula = ? ";
+        
+        try(PreparedStatement stmt = this.query(qr)) 
+        {
+            stmt.setDouble(1,a.getSaldo() + saldo);
+            stmt.setString(2,a.getMatricula());
+            stmt.execute();
+            stmt.close();
+            
+        }catch(Exception e){
+            System.out.println(e.getMessage() + " entrei creditar alunoDAO");
+            resposta = false;
+        
+        }
+
+    return resposta;
+    }
+    
+    
+
+
+
+
+   }
+    
      
-}
+
 
