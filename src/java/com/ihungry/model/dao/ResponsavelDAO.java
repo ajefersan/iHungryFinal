@@ -111,31 +111,14 @@ public class ResponsavelDAO extends UsuarioDAO{
         resultset.close();
         return lista;
     }
-    public Usuario login(String usuario,String senha) throws SQLException{
-        
-       String sql = "SELECT usuario.* FROM responsavel" +
-                    "LEFT JOIN usuario ON usuario.idUsuario = responsavel.idUsuario_FK" +
-                    "WHERE usuario.login = '"+usuario+"' AND usuario.senha='"+senha+"'";   
-       Usuario user = new Usuario();
-       ArrayList<Usuario> lista;
-       
-       try(PreparedStatement stmt = this.query(sql))
-       {
-           ResultSet rs = stmt.executeQuery();
-           lista = user.listarUser(rs);
-           stmt.close();
-       }
-       
-       return (lista.size() > 0) ? lista.get(0) : null;
-    }
-     
+    
      
       public Usuario respConsultarFilhos(Responsavel resp) throws SQLException{
         
-       String sql = "SELECT * FROM aluno\n" +
-                    "INNER JOIN responsavel\n" +
-                    "ON aluno.idResponsavel_FK = responsavel.idResponsavel\n" +
-                    "WHERE aluno.idResponsavel_FK = '" + resp.getIdResponsavel();
+       String sql = "SELECT * FROM aluno " +
+                    "INNER JOIN responsavel " +
+                    "ON aluno.idResponsavel_FK = responsavel.idResponsavel " + 
+                    "WHERE aluno.idResponsavel_FK = "+ resp.getIdResponsavel()+" ";
       
        ArrayList<Aluno> lista;
        
@@ -146,6 +129,8 @@ public class ResponsavelDAO extends UsuarioDAO{
            stmt.close();
        }
        
+       for (Aluno a : lista )
+              System.out.println(a.getNome());
        return (lista.size() > 0) ? lista.get(0) : null;
     }
     

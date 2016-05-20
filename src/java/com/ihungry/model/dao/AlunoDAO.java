@@ -169,7 +169,31 @@ public class AlunoDAO extends UsuarioDAO{
      
      
      }
-     
+
+       
+       public ArrayList<Aluno> listarAlunos(ResultSet resultset) throws SQLException
+    {
+        ArrayList<Aluno> lista = new ArrayList<>();
+        
+        while(resultset.next()) 
+        {
+            Aluno item = new Aluno();
+            
+            item.setNome(resultset.getString("nome"));
+            item.setMatricula(resultset.getString("matricula"));
+            item.setTurma(resultset.getString("turma"));
+            item.setTurno(resultset.getString("turno"));
+            item.setSaldo(resultset.getDouble("saldo"));
+           // item.setIdUsuario(resultset.getInt("idUsuario_FK"));
+           // item.setIdResponsavel(resultset.getInt("idResponsavel_FK"));
+           // item.setIdEscola(resultset.getInt("idEscola_FK"));
+
+            lista.add(item);
+        }
+        
+        resultset.close();
+        return lista;
+    }
        
     public float consultarSaldo(String matricula){
         float saldo = 0;
@@ -193,11 +217,11 @@ public class AlunoDAO extends UsuarioDAO{
     
     public Aluno consularPorMatricula(String matricula){
         
-        String qr = "SELECT usuario.nome, aluno.saldo FROM usuario INNER JOIN aluno on IdUsuario = idUsuario_FK WHERE aluno.matricula = '" + matricula + " '" ;
+        String qr = "SELECT usuario.nome, aluno.saldo,aluno.idAluno FROM usuario INNER JOIN aluno on IdUsuario = idUsuario_FK WHERE aluno.matricula = '" + matricula + " '" ;
         Aluno aluno = new Aluno();
           try (PreparedStatement stmt = this.query(qr)) 
         {
-           // stmt.setInt(1,id);
+          
            
             ResultSet rs = stmt.executeQuery();
             rs.next();
@@ -206,6 +230,7 @@ public class AlunoDAO extends UsuarioDAO{
            aluno.setMatricula(matricula);
            aluno.setSaldo(rs.getDouble("saldo"));
            aluno.setIdAluno(rs.getInt("idAluno"));
+           rs.close();
              
             
            
@@ -267,6 +292,8 @@ public class AlunoDAO extends UsuarioDAO{
         
         }
     }
+    
+    
     
    
     
@@ -331,7 +358,6 @@ public class AlunoDAO extends UsuarioDAO{
     }
     
     
-
 
 
 

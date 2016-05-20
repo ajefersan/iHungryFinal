@@ -12,8 +12,10 @@ import java.util.ArrayList;
 
 public class ConsumoDAO extends ConnectionFactory {
     
-    public void cadastrar(Consumo item) throws SQLException
+    public boolean cadastrar(Consumo item) throws SQLException
     {   
+        
+        boolean resposta = true;
         String qr = "INSERT INTO consumo (codigo,tipo) VALUES (?,?)";
                                                                         
         
@@ -21,15 +23,18 @@ public class ConsumoDAO extends ConnectionFactory {
             
         {
             
-            stmt.setDate(1, (Date) item.getData());
-            stmt.setInt(2, item.getIdProduto());
-            stmt.setInt(3,item.getIdAluno());
+            stmt.setInt(1, item.getIdProduto());
+            stmt.setInt(2,item.getIdAluno());
                        
             stmt.execute();
             stmt.close(); 
             System.out.println("Cad 5 ok!");
         } catch (SQLException e){
+            System.out.print(e.getMessage() + "entrei DAO consumo");
+            resposta = false;
         }
+        
+        return resposta ;
     
     }
     

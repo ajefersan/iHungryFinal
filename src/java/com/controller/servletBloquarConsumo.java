@@ -39,6 +39,7 @@ public class servletBloquarConsumo extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
+        
        String matricula = request.getParameter("matricula");
         int id = Integer.parseInt(request.getParameter("id"));
         AlunoDAO aluno = new AlunoDAO();
@@ -57,7 +58,13 @@ public class servletBloquarConsumo extends HttpServlet {
                 response.sendRedirect("reponsavel.jsp?pagina=listarAluno");
         
         
-        }}catch(Exception e ){
+        }else{
+            System.out.print("Entrei aqui");
+            
+         }
+        
+        
+        }catch(Exception e ){
            
                 System.out.println(e.getMessage() + "entre servlet consumo ");
                 

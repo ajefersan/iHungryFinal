@@ -7,10 +7,10 @@ package com.controller;
 
 import com.ihungre.model.Responsavel;
 import com.ihungre.model.Usuario;
+import com.ihungre.model.Invalido;
 import com.ihungry.model.dao.ResponsavelDAO;
 import com.ihungry.model.dao.UsuarioDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,6 +20,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -45,32 +46,49 @@ public class servletLogin extends HttpServlet {
         String senha = request.getParameter("senha");
         
         ResponsavelDAO respons = new ResponsavelDAO();
-        Usuario responsavel = respons.login(login, senha);
+  //      Usuario responsavel = respons.login(login, senha);
+  
+  UsuarioDAO  user= new UsuarioDAO();
+      
+        boolean confirm = user.login(login, senha);
+                
+        Usuario usuario = user.getUsuario(login, senha);
         
-       
-         
-         if(responsavel != null){
-             if("ALUNO".equals(responsavel.getTipoUsuario())){
-                    RequestDispatcher rd = request.getRequestDispatcher("responsavel/logado.jsp");
-                    rd.include(request, response);
-         
-            }else if("RESPONSAVEL".equals(responsavel.getTipoUsuario())){
-                RequestDispatcher rd = request.getRequestDispatcher("cadastrador.jsp");
+        HttpSession session = request.getSession();
+        Usuario usuarioSessao = (Usuario) session.getAttribute("usuarioSessao");
+         if(confirm == true){
+             
+            session = request.getSession(true);
+            
+            String tipoUsuario = usuario.getTipoUsuario();
+            if(tipoUsuario.equals("ALUNO")){
+           //     Aluno aluno = user.getRespons(0)
+                RequestDispatcher rd = request.getRequestDispatcher("aluno.jsp");
                 rd.include(request, response);
-         
-         
+            }else if(tipoUsuario.equals("FUNCIONARIO")){
+                RequestDispatcher rd = request.getRequestDispatcher("funcionario.jsp");
+                rd.include(request, response);
+            }else if(tipoUsuario.equals("RESPONSAVEL")){
+                RequestDispatcher rd = request.getRequestDispatcher("responsavel.jsp");
+                rd.include(request, response);
             }else{
-                RequestDispatcher rd = request.getRequestDispatcher("cadEscola.jsp");
-                rd.include(request, response);
+                session.invalidate();
+                RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+                throw new Invalido("Login ou Senha invalidos");
             
             }
-         
+            
          }else{
-             RequestDispatcher rd = request.getRequestDispatcher("erro.jsp");
-             rd.include(request, response);
-         
-         
+            session.invalidate();
+            RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+            throw new Invalido("Login ou Senha invalidos");
+            
          }
+        
+        
+        
+       
+        
          
     }
 

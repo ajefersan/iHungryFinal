@@ -49,20 +49,29 @@ public class testeInsertUserAluno {
       aluno.setNome("jeferson");
       
       
-      AlunoDAO alunoDAO = new AlunoDAO();
+     
         alunoDAO.cadastrar(aluno,"cpf3"); 
      Responsavel res = new Responsavel();
         res.depositarCredito(aluno, 500,"cpf3");
         System.out.println(aluno.consultarSaldo(aluno.getMatricula()));*/
       
     
-    ProdutoDAO prod = new ProdutoDAO();
+  /*  ProdutoDAO prod = new ProdutoDAO();
     
     Produto produto =  prod.consultarPorId(10);
     
-    System.out.println(produto.getIdProduto() + " " + produto.getNome());
+    System.out.println(produto.getIdProduto() + " " + produto.getNome());*/
+  
+   ResponsavelDAO respos = new ResponsavelDAO();
+   Responsavel responsavel = new Responsavel();
+   
+   responsavel.setIdResponsavel(4);
+   
+   respos.respConsultarFilhos(responsavel);
     
      
+      
+      
    
 }
    

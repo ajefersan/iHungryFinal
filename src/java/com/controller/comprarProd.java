@@ -5,10 +5,11 @@
  */
 package com.controller;
 
-import com.ihungre.model.Produto;
-import com.ihungry.model.dao.ProdutoDAO;
+import com.ihungre.model.Comprar;
 import java.io.IOException;
-
+import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,8 +21,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author jeferson
  */
-@WebServlet(name = "servletProdutoAdd", urlPatterns = {"/servletProdutoAdd"})
-public class servletProdutoAdd extends HttpServlet {
+@WebServlet(name = "comprarProd", urlPatterns = {"/comprarProd"})
+public class comprarProd extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,40 +34,28 @@ public class servletProdutoAdd extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
-        Produto produto = new Produto();
-        ProdutoDAO prod = new ProdutoDAO();
-        boolean resposta = true;
-        
-        
-        produto.setCodigo(request.getParameter("codigo"));
-        produto.setNome(request.getParameter("nome"));
-        produto.setTipo(request.getParameter("tipo"));
-        produto.setObservacao(request.getParameter("observacao"));
-        produto.setPreco(Double.parseDouble(request.getParameter("preco")));
-        produto.setQuantidade(Integer.parseInt(request.getParameter("quantidade")));
-        produto.setStatus(1);
        
+        String codigo = request.getParameter("codigo");
+        String idAluno = request.getParameter("idAluno");
+        Comprar compras = new Comprar();
         
-        request.setAttribute("produto", produto);
-
-    
-    
-        try{
-          if(resposta =  prod.cadastrar(produto)){
-             RequestDispatcher rd = request.getRequestDispatcher("funcionario.jsp?pagina=cadProduto");
+       boolean resposta = compras.comprarProd(idAluno, codigo,"2014-05-15");
+       String mensagem = "<script>alert('comprado com sucesso');</>";
+       
+       if(resposta){
+          request.setAttribute("mensagem", mensagem);
+          RequestDispatcher rd = request.getRequestDispatcher("aluno.jsp");
              rd.include(request, response);
-        
-          }
-        
-        }catch(Exception e){
-            
-             RequestDispatcher rd = request.getRequestDispatcher("erro.jsp");
-             rd.include(request, response);
-        }
-        
-     
+       
+       }else{
+       
+        response.sendRedirect("erro.jsp");
+       
+       }
+       
+       
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -81,7 +70,11 @@ public class servletProdutoAdd extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(comprarProd.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -95,7 +88,11 @@ public class servletProdutoAdd extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(comprarProd.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

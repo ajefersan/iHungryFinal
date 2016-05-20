@@ -26,10 +26,10 @@ public class ConsumoBloqueadoDAO extends ConnectionFactory{
            
             stmt.execute();
             stmt.close(); 
-            System.out.println("Cad ok!");
+            
         } catch (SQLException e){
             
-            System.out.print(e.getMessage() + "enteri dao consumo bloqueado");
+            System.out.print(e.getMessage() + "entrei dao consumo bloqueado");
             resposta = false;
         }
         

@@ -10,9 +10,9 @@ import java.util.ArrayList;
 
 public class Comprar extends ConnectionFactory {
   
-    public ArrayList<Produto> consultarProduto(String codigo) throws SQLException 
+    public Produto consultarProduto(String codigo) throws SQLException 
         {
-            ArrayList<Produto> lista = null;
+            Produto lista = null;
 
             String qr = "SELECT * FROM produto WHERE codigo = ?";
 
@@ -23,17 +23,16 @@ public class Comprar extends ConnectionFactory {
                 stmt.setString(1, codigo);
 
                     ResultSet rs = stmt.executeQuery();
-                    lista = prod.listarProduto(rs);
+                    rs.next();
+                    
+                    lista.setNome(rs.getString("nome"));
+                    lista.setIdProduto(rs.getInt("idProduto"));
+                    lista.setPreco(rs.getDouble("preco"));
+                    lista.setStatus(rs.getInt("status"));
                     rs.close();  
             }
 
-            for (Produto resp : lista) {
-                System.out.println("Nome: " + resp.getNome());
-                System.out.println("Email: " + resp.getCodigo());
-                System.out.println("Endereço: " + resp.getObservacao());
-                System.out.println("Endereço: " + resp.getTipo());
-                System.out.println("\n");
-                }
+            
              return lista;
         }  
 
@@ -73,13 +72,13 @@ public class Comprar extends ConnectionFactory {
            AlunoDAO alunoDAO = new AlunoDAO();
            int idAluno = alunoDAO.pegarIdAluno(matricula);
 
-           Comprar comp = new Comprar();
+        //   Comprar comp = new Comprar(); '-' Não esqueça o THIS
 
            int idProduto;
-           idProduto = comp.pegarIdProduto(codigo);
+           idProduto = this.pegarIdProduto(codigo);
            
-           Double val = comp.consultarValorProduto(codigo);
-           Double sal = comp.consultarSaldo(idAluno);
+           Double val = this.consultarValorProduto(codigo);
+           Double sal = this.consultarSaldo(idAluno);
            if(val > sal)
            {    
                System.out.println("Saldo insuficiente");
@@ -98,10 +97,11 @@ public class Comprar extends ConnectionFactory {
 
            }catch (SQLException e){
                 System.out.println("Erro compra " + e.getMessage());
+                return false;
             }
 
-           comp.atualizarS(idAluno, val);
-           String sql2 = "";
+           this.atualizarS(idAluno, val);
+           
            return true;
        }
 
